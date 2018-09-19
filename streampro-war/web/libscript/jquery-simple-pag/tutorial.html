@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>simplePagination.js - A simple jQuery pagination plugin and 3 CSS themes.</title>
+	<link href="tutorial_files/css.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="tutorial_files/style.css">
+	<link rel="stylesheet" type="text/css" href="tutorial_files/simplePagination.css">
+	<link rel="stylesheet" type="text/css" href="tutorial_files/hl.css">
+</head>
+<body>
+
+<a href="https://github.com/flaviusmatis/simplePagination.js"><img style="position: absolute; top: 0; right: 0; border: 0;" src="tutorial_files/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+
+<div class="content">
+
+	<p class="top-links">Check out my <a href="http://flaviusmatis.github.com/">GitHub page</a> for other plugins.</p>
+
+	<h1>
+		<ul>
+			<li><a href="https://github.com/flaviusmatis/simplePagination.js">Project page</a></li>
+			<li><a href="https://github.com/flaviusmatis/simplePagination.js/issues">Issues</a></li>
+		</ul>
+		<strong>simplePagination.js</strong>
+	</h1>
+
+	<p class="spacer heading">A simple jQuery pagination plugin, 3 CSS themes and Bootstrap support.</p>
+
+	<h2>CSS Themes</h2>
+
+	<p class="spacer">"light-theme"</p>
+
+	<div class="pagination-holder clearfix">
+			<div id="light-pagination" class="pagination light-theme simple-pagination"><ul><li><a href="#page-18" class="page-link prev">Prev</a></li><li><a href="#page-1" class="page-link">1</a></li><li><a href="#page-2" class="page-link">2</a></li><li class="disabled"><span class="ellipse">…</span></li><li><a href="#page-16" class="page-link">16</a></li><li><a href="#page-17" class="page-link">17</a></li><li><a href="#page-18" class="page-link">18</a></li><li class="active"><span class="current">19</span></li><li><a href="#page-20" class="page-link">20</a></li><li><a href="#page-20" class="page-link next">Next</a></li></ul></div>
+	</div>
+
+	<p class="spacer">"dark-theme"</p>
+
+	<div class="pagination-holder black clearfix">
+			<ul id="dark-pagination" class="pagination dark-theme simple-pagination"><li class="active"><span class="current prev">Prev</span></li><li class="active"><span class="current">1</span></li><li><a href="#page-2" class="page-link">2</a></li><li><a href="#page-3" class="page-link">3</a></li><li class="disabled"><span class="ellipse">…</span></li><li><a href="#page-18" class="page-link">18</a></li><li><a href="#page-19" class="page-link">19</a></li><li><a href="#page-20" class="page-link">20</a></li><li><a href="#page-2" class="page-link next">Next</a></li></ul>
+	</div>
+
+	<p class="spacer">"compact-theme"</p>
+
+	<div class="pagination-holder clearfix">
+			<div class="compact-theme simple-pagination" id="compact-pagination"><ul><li class="active"><span class="current prev">Prev</span></li><li class="active"><span class="current">1</span></li><li><a href="#page-2" class="page-link">2</a></li><li><a href="#page-3" class="page-link">3</a></li><li><a href="#page-4" class="page-link">4</a></li><li><a href="#page-5" class="page-link">5</a></li><li><a href="#page-6" class="page-link">6</a></li><li><a href="#page-7" class="page-link">7</a></li><li class="disabled"><span class="ellipse">…</span></li><li><a href="#page-69" class="page-link">69</a></li><li><a href="#page-70" class="page-link">70</a></li><li><a href="#page-2" class="page-link next">Next</a></li></ul></div>
+	</div>
+
+	<h2>Download</h2>
+
+	<p class="spacer">Get the zip containing the plugin and the CSS themes <a href="https://github.com/flaviusmatis/simplePagination.js/zipball/master">here</a>.</p>
+
+	<h2>How To Use</h2>
+
+	<p class="spacer"><strong>Step 1:</strong> together with JQuery, include jquery.simplePagination.js in your page:</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight html"><span class="paren xml-tagangle">&lt;</span><span class="keyword xml-tag xml-tag-open">script</span> <span class="builtin xml-attribute">type</span><span class="undefined"></span><span class="operator">=</span><span class="string"><span class="before">"</span>text/javascript<span class="after">"</span></span> <span class="builtin xml-attribute">src</span><span class="undefined"></span><span class="operator">=</span><span class="string"><span class="before">"</span>path_to/jquery.js<span class="after">"</span></span><span class="paren xml-tagangle">&gt;</span><span class="paren xml-tagangle">&lt;/</span><span class="keyword xml-tag xml-tag-close">script</span><span class="paren xml-tagangle">&gt;</span>
+<span class="paren xml-tagangle">&lt;</span><span class="keyword xml-tag xml-tag-open">script</span> <span class="builtin xml-attribute">type</span><span class="undefined"></span><span class="operator">=</span><span class="string"><span class="before">"</span>text/javascript<span class="after">"</span></span> <span class="builtin xml-attribute">src</span><span class="undefined"></span><span class="operator">=</span><span class="string"><span class="before">"</span>path_to/jquery.simplePagination.js<span class="after">"</span></span><span class="paren xml-tagangle">&gt;</span><span class="paren xml-tagangle">&lt;/</span><span class="keyword xml-tag xml-tag-close">script</span><span class="paren xml-tagangle">&gt;</span></pre>
+
+	</div>
+
+	<p class="spacer">JQuery 1.7.2 or later is recommended. Older versions might work as well, but they are not tested.</p>
+
+	<p class="spacer"><strong>Step 2:</strong> OPTIONAL - include the CSS file with the 3 default themes</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight html"><span class="paren xml-tagangle">&lt;</span><span class="keyword xml-tag xml-tag-open">link</span> <span class="builtin xml-attribute">type</span><span class="undefined"></span><span class="operator">=</span><span class="string"><span class="before">"</span>text/css<span class="after">"</span></span> <span class="builtin xml-attribute">rel</span><span class="undefined"></span><span class="operator">=</span><span class="string"><span class="before">"</span>stylesheet<span class="after">"</span></span> <span class="builtin xml-attribute">href</span><span class="undefined"></span><span class="operator">=</span><span class="string"><span class="before">"</span>path_to/simplePagination.css<span class="after">"</span></span><span class="paren xml-tagangle">/&gt;</span></pre>
+
+	</div>
+
+	<p class="spacer">If you skip this step, you will need to define your own styles or use <a href="http://twitter.github.io/bootstrap/" target="_blank">Bootstrap</a>.</p>
+
+	<p class="spacer"><strong>Step 3:</strong> call the function on your pagination placeholder:</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="paren">{</span>
+        <span class="operand hashkey">items</span><span class="hasharrow">:</span> <span class="operand">100</span><span class="comma">,</span>
+        <span class="operand hashkey">itemsOnPage</span><span class="hasharrow">:</span> <span class="operand">10</span><span class="comma">,</span>
+        <span class="operand hashkey">cssStyle</span><span class="hasharrow">:</span> <span class="string"><span class="before">'</span>light-theme<span class="after">'</span></span>
+    <span class="paren">}</span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+			
+	</div>
+
+	<p class="spacer">If necessary, you can specify the number of pages 
+directly, via "pages" parameter, instead of "items" and "itemsOnPage" 
+which are used by the plugin to automatically calculate the number of 
+pages.</p>
+
+	<h2>Available options</h2>
+
+	<table>
+		<tbody>
+			<tr>
+				<td><strong>items</strong></td>
+				<td>Integer</td>
+				<td>Default: 1</td>
+				<td>Total number of items that will be used to calculate the pages.</td>
+			</tr>
+			<tr>
+				<td><strong>itemsOnPage</strong></td>
+				<td>Integer</td>
+				<td>Default: 1</td>
+				<td>Number of items displayed on each page.</td>
+			</tr>
+			<tr>
+				<td><strong>pages</strong></td>
+				<td>Integer</td>
+				<td>Optional</td>
+				<td>If specified, <strong>items</strong> and <strong>itemsOnPage</strong> will not be used to calculate the number of pages.</td>
+			</tr>
+			<tr>
+				<td><strong>displayedPages</strong></td>
+				<td>Integer</td>
+				<td>Default: 5</td>
+				<td>How many page numbers should be visible while navigating.<br><strong>Minimum allowed: 3</strong> (previous, current &amp; next)</td>
+			</tr>
+			<tr>
+				<td><strong>edges</strong></td>
+				<td>Integer</td>
+				<td>Default: 2</td>
+				<td>How many page numbers are visible at the beginning/ending of the pagination.</td>
+			</tr>
+			<tr>
+				<td><strong>currentPage</strong></td>
+				<td>Integer</td>
+				<td>Default: 1</td>
+				<td>Which page will be selected immediately after init.</td>
+			</tr>
+			<tr>
+				<td><strong>hrefTextPrefix</strong></td>
+				<td>String</td>
+				<td>Default: "#page-"</td>
+				<td>A string used to build the href attribute, added before the page number.</td>
+			</tr>
+			<tr>
+				<td><strong>hrefTextSuffix</strong></td>
+				<td>String</td>
+				<td>Default: empty string</td>
+				<td>Another string used to build the href attribute, added after the page number.</td>
+			</tr>
+			<tr>
+				<td><strong>prevText</strong></td>
+				<td>String</td>
+				<td>Default: "Prev"</td>
+				<td>Text to be display on the previous button.</td>
+			</tr>
+			<tr>
+				<td><strong>nextText</strong></td>
+				<td>String</td>
+				<td>Default: "Next"</td>
+				<td>Text to be display on the next button.</td>
+			</tr>
+			<tr>
+				<td><strong>cssStyle</strong></td>
+				<td>String</td>
+				<td>Default: "light-theme"</td>
+				<td>The class of the CSS theme.</td>
+			</tr>
+			<tr>
+				<td><strong>selectOnClick</strong></td>
+				<td>Boolean</td>
+				<td>Default: true</td>
+				<td>Set to false if you don't want to select the page immediately after click.</td>
+			</tr>
+			<tr>
+				<td><strong>onPageClick</strong>(pageNumber, event)</td>
+				<td>Function</td>
+				<td>Optional</td>
+				<td>Function to call when a page is clicked.<br>Page number and event are optional parameters.</td>
+			</tr>
+			<tr>
+				<td><strong>onInit</strong></td>
+				<td>Function</td>
+				<td>Optional</td>
+				<td>Function to call when the pagination is initialized.</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h2>Available methods</h2>
+
+	<p><strong>selectPage</strong> - Select a page based on page number.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>selectPage<span class="after">'</span></span><span class="comma">,</span> <span class="operand">pageNumber</span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>prevPage</strong> - Selects the previous page.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>prevPage<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>nextPage</strong> - Select the next page.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>nextPage<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>getPagesCount</strong> - Returns the total number of pages.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>getPagesCount<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>getCurrentPage</strong> - Returns the current page number.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>getCurrentPage<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>disable</strong> - Disables pagination functionality.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>disable<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>enable</strong> - Enables the pagination after it was previously disabled.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>enable<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>destroy</strong> - Visually destroys the pagination, any existing settings are kept.</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>destroy<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>redraw</strong> - The pagination is drawn again using the existing settings. (useful after you have destroyed a pagination for example)</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>redraw<span class="after">'</span></span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<p><strong>updateItems</strong> - allows to dynamically change how many items are rendered by the pagination</p>
+
+	<div class="block">
+
+<pre name="code" class="DlHighlight js">$<span class="paren">(</span><span class="operand keyword">function</span><span class="paren">(</span><span class="paren">)</span> <span class="paren">{</span>
+    $<span class="paren">(</span><span class="operand">selector</span><span class="paren">)</span>.<span class="operand">pagination</span><span class="paren">(</span><span class="string"><span class="before">'</span>updateItems<span class="after">'</span></span><span class="comma">,</span> <span class="operand">100</span><span class="paren">)</span>;
+<span class="paren">}</span><span class="paren">)</span>;</pre>
+
+	</div>
+
+	<h2>Support &amp; Feedback</h2>
+
+	<p>For issues or suggestions please see <a href="https://github.com/flaviusmatis/simplePagination.js">simplePagination.js on Github</a>, or tweet <a href="http://twitter.com/#%21/flaviusmatis">@flaviusmatis</a>.</p>
+
+	<p class="spacer">Thanks for your support!</p>
+
+</div>
+
+<script type="text/javascript" src="tutorial_files/jquery_002.js"></script>
+<script type="text/javascript" src="tutorial_files/hl-all.js"></script>
+<script type="text/javascript" src="tutorial_files/jquery.js"></script>
+<script type="text/javascript" src="tutorial_files/script.js"></script>
+
+
+</body></html>

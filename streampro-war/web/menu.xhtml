@@ -1,0 +1,49 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pa="http://primefaces.org/barcelona">
+    
+    <div class="layout-sidebar">
+        <pa:tabMenu>
+            <pa:tab icon="home" title="Albums">
+                <h:form id="menu-album">
+                    <pa:menu widgetVar="al">
+                        <p:menuitem id="li_al" value="List" icon="&#xE869;" action="app.album.list" ajax="false" />
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="home" title="Companies">
+                <h:form id="menu-comp">
+                    <pa:menu widgetVar="co">
+                        <p:menuitem id="li_co" value="List" icon="&#xE880;" action="app.company.list" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="home" title="Artists">
+                <h:form id="menu-art">
+                    <pa:menu widgetVar="co">
+                        <p:menuitem id="li_ar" value="List" icon="&#xE880;" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="home" title="Songs">
+                <h:form id="menu-canc">
+                    <pa:menu widgetVar="co">
+                        <p:menuitem id="li_ca" value="List" icon="&#xE880;" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="home" title="Playlists">
+                <h:form id="menu-playl">
+                    <pa:menu widgetVar="co">
+                        <p:menuitem id="li_pl" value="List" icon="&#xE880;" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+        </pa:tabMenu>        
+    </div>
+    
+</ui:composition>

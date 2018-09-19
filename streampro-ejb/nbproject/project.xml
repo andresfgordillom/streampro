@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://www.netbeans.org/ns/project/1">
+    <type>org.netbeans.modules.j2ee.ejbjarproject</type>
+    <configuration>
+        <data xmlns="http://www.netbeans.org/ns/j2ee-ejbjarproject/3">
+            <name>streampro-ejb</name>
+            <minimum-ant-version>1.6.5</minimum-ant-version>
+            <explicit-platform explicit-source-supported="true"/>
+            <included-library dirs="200">file.reference.antlr-2.7.6.jar</included-library>
+            <included-library dirs="200">file.reference.asm-attrs.jar</included-library>
+            <included-library dirs="200">file.reference.asm.jar</included-library>
+            <included-library dirs="200">file.reference.cglib-2.1.3.jar</included-library>
+            <included-library dirs="200">file.reference.commons-collections-2.1.1.jar</included-library>
+            <included-library dirs="200">file.reference.dom4j-1.6.1.jar</included-library>
+            <included-library dirs="200">file.reference.ehcache-1.2.3.jar</included-library>
+            <included-library dirs="200">file.reference.ejb3-persistence.jar</included-library>
+            <included-library dirs="200">file.reference.hibernate-annotations.jar</included-library>
+            <included-library dirs="200">file.reference.hibernate-commons-annotations.jar</included-library>
+            <included-library dirs="200">file.reference.hibernate-entitymanager.jar</included-library>
+            <included-library dirs="200">file.reference.hibernate-tools.jar</included-library>
+            <included-library dirs="200">file.reference.hibernate3.jar</included-library>
+            <included-library dirs="200">file.reference.javassist.jar</included-library>
+            <included-library dirs="200">file.reference.jdbc2_0-stdext.jar</included-library>
+            <included-library dirs="200">file.reference.jta.jar</included-library>
+            <included-library dirs="200">file.reference.jtidy-r8-20060801.jar</included-library>
+            <included-library dirs="200">file.reference.org-apache-commons-logging.jar</included-library>
+            <included-library dirs="200">file.reference.jaxen-full.jar</included-library>
+            <source-roots>
+                <root id="src.dir" name="Source Packages"/>
+            </source-roots>
+            <test-roots>
+                <root id="test.src.dir" name="Test Packages"/>
+            </test-roots>
+        </data>
+        <libraries xmlns="http://www.netbeans.org/ns/ant-project-libraries/1">
+            <definitions>..\.\lib\nblibraries.properties</definitions>
+        </libraries>
+    </configuration>
+</project>

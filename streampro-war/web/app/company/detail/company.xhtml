@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_compDetailTemp.xhtml">
+
+            <ui:define name="app.content.company.detail._comptemplate.content">
+
+                <div align="center">
+                    <h:outputText value="#{companyController.msg}" styleClass="ok"/>
+                    <h:outputText value="#{companyController.msgErr}" styleClass="warning"/>
+
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">Detalle</f:facet>
+
+                        <p:outputLabel for="id_" value="Id"/>
+                        <p:outputLabel id="id_" value="#{companyController.obj.idcompany}"/>
+                        
+                        <p:outputLabel for="compName_" value="Nombre"/>
+                        <p:outputLabel id="compName_" value="#{companyController.obj.compName}"/>
+                        
+                        <p:outputLabel for="identificator_" value="Identificador"/>
+                        <p:outputLabel id="identificator_" value="#{companyController.obj.identificator}"/>
+
+                    </p:panelGrid>
+
+                    <br/><br/><br/>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

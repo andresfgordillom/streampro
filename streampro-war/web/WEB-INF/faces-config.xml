@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.0"
+              xmlns="http://java.sun.com/xml/ns/javaee" 
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
+
+    <component>
+        <component-type>org.primefaces.component.BarcelonaMenu</component-type>
+        <component-class>org.primefaces.barcelona.component.Menu</component-class>
+    </component>
+    
+    <component>
+        <component-type>org.primefaces.component.BarcelonaTabMenu</component-type>
+        <component-class>org.primefaces.barcelona.component.TabMenu</component-class>
+    </component>
+    
+    <component>
+        <component-type>org.primefaces.component.BarcelonaTab</component-type>
+        <component-class>org.primefaces.barcelona.component.Tab</component-class>
+    </component>
+    
+    <render-kit>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.BarcelonaMenuRenderer</renderer-type>
+            <renderer-class>org.primefaces.barcelona.component.MenuRenderer</renderer-class>
+        </renderer>
+        <renderer>
+            <component-family>org.primefaces.component</component-family>
+            <renderer-type>org.primefaces.component.BarcelonaTabMenuRenderer</renderer-type>
+            <renderer-class>org.primefaces.barcelona.component.TabMenuRenderer</renderer-class>
+        </renderer>
+    </render-kit>
+        
+    <!-- Reglas de Navegacion-->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.album.list</from-outcome>
+            <to-view-id>/app/album/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.album.new</from-outcome>
+            <to-view-id>/app/album/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.album.search</from-outcome>
+            <to-view-id>/app/album/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.company.list</from-outcome>
+            <to-view-id>/app/company/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+             <from-outcome>app.company.new</from-outcome>
+            <to-view-id>/app/company/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.company.search</from-outcome>
+            <to-view-id>/app/company/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.company.detail.company</from-outcome>
+            <to-view-id>/app/company/detail/company.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.company.detail.edit</from-outcome>
+            <to-view-id>/app/company/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>                    

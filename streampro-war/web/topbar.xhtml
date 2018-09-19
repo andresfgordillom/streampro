@@ -1,0 +1,33 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pa="http://primefaces.org/barcelona">
+
+    <div class="topbar">
+        <div class="logo">
+            
+                <p:graphicImage name="images/logo.png" library="barcelona-layout" />
+            
+        </div>
+        
+        <p:graphicImage url="http://streampro.cl/wp-content/uploads/2016/07/LOGO2_STREAMPRO.png" 
+                        height="180" width="180" library="barcelona-layout" styleClass="app-name"/>
+        
+        <a id="topbar-menu-button" href="#">
+            <i class="fa fa-bars"></i>
+        </a>
+        
+        <ul class="topbar-menu fadeInDown animated">
+            <li>
+                <a href="#">
+                    <i class="topbar-icon fa fa-fw fa-cog"></i>
+                    <span class="topbar-item-name">Settings</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</ui:composition>

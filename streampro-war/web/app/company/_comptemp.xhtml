@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../_apptemplate.xhtml">
+
+            <ui:define name="head">
+                head
+            </ui:define>
+
+            <ui:define name="app.menu">
+                <h:form>
+                    <p:menubar>
+                        <p:menuitem url="http://#{utilControl.hostPortContext}/app/company/search.xhtml"
+                                    value="Buscar" icon="ui-icon-search"/>
+                        <p:menuitem url="http://#{utilControl.hostPortContext}/app/company/list.xhtml"
+                                    value="Lista" icon="ui-icon-note"/>
+                        <p:menuitem url="http://#{utilControl.hostPortContext}/app/company/new.xhtml" 
+                                    value="Nuevo" icon="ui-icon-plusthick"/>
+                    </p:menubar>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="app.content">
+                <ui:insert name="app.content.company._comptemplate.content">app.content.company._comptemplate.content</ui:insert>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

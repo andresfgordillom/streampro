@@ -1,0 +1,34 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pagination</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <link type="text/css" rel="stylesheet" href="simplepagination/simplePagination.css"/>
+        <script type="text/javascript" src="simplepagination/jquery.js"></script>
+        <script type="text/javascript" src="simplepagination/jquery.simplePagination.js"></script>
+
+
+    </head>
+    <body>
+        <div id="pag">
+
+        </div>
+        <script type="text/javascript">
+            $(function() {
+                $("#pag").pagination({
+                    items: 100,
+                    itemsOnPage: 10,
+                    cssStyle: 'light-theme',
+                    onPageClick:function(pageNumber, event){
+                        alert(pageNumber);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
