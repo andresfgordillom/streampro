@@ -1,6 +1,5 @@
 package general;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.faces.context.FacesContext;
 
@@ -152,11 +151,6 @@ public class EntityControl {
         }
     }
 
-    /*public String orderByCampo() {
-     Order = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("cOrder_");
-     setAscDesc_();
-     return null;
-     }*/
     public String first() {
         this.firstRegList = 0;
         return null;
@@ -251,61 +245,9 @@ public class EntityControl {
         return null;
     }
 
-    public int recuperaNumAllObj(AbstractFacade facade) {
-        String hql = "SELECT count(obj) FROM " + this.getEntityName() + " obj";
-        List l = facade.find(hql, true, 0, 0);
-        int n = 0;
-        try {
-            n = Integer.parseInt(l.get(0).toString());
-        } catch (Exception e) {
-            msgErr = "FALLA, calculando total de registros->" + e;
-        }
-        this.totalCount = n;
-        return n;
-    }
-
     public void recuperaAllObj(AbstractFacade facade) {
         String hql = "SELECT obj FROM " + this.getEntityName() + " obj ORDER BY " + this.getOrderBy() + " " + this.getAscDesc();
         lst = facade.find(hql, false, this.getFirstRegList(), this.getMaxRegList());
-    }
-
-    private int recuperaNumAllObj(String hql, AbstractFacade facade) {
-        List l = facade.find(hql, true, 0, 0);
-        int n = 0;
-        try {
-            n = Integer.parseInt(l.get(0).toString());
-        } catch (Exception e) {
-            msgErr = "FALLA, calculando total de registros->" + e;
-        }
-        this.totalCount = n;
-        return n;
-    }
-
-    private void recuperaAllObj(String hql, AbstractFacade facade) {
-        lst = facade.find(hql, false, this.getFirstRegList(), this.getMaxRegList());
-    }
-
-    private void recuperaAllObj(String hql, AbstractFacade facade, boolean allResult) {
-        lst = facade.find(hql, allResult, this.getFirstRegList(), this.getMaxRegList());
-    }
-
-    //Calcular total busqueda
-    private int totalBuscarNumObj(AbstractFacade facade, String sql, boolean buscarPorId, Object id) {
-        //Si es nu valor muy corto
-        if (queryVal == null || queryVal.trim().compareTo("") == 0 || queryVal.trim().length() < 0) {
-            return 0;
-        }
-
-        return 0;
-    }
-
-    private void recuperaBuscar(AbstractFacade facade, String sql, boolean buscarPorId, Object id, Class classEntity) {
-        //Si es nu valor muy corto
-        if (queryVal == null || queryVal.trim().compareTo("") == 0 || queryVal.trim().length() < 0) {
-            return;
-        }
-
-        lst = new ArrayList();
     }
 
     public String orderByCampo() {

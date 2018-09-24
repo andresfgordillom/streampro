@@ -8,6 +8,7 @@ import entity.Company;
 import facade.CompanyFacade;
 import general.EntityControl;
 import interfaces.EntityControlInterface;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -75,12 +76,11 @@ public class CompanyController extends EntityControl implements EntityControlInt
 
     @Override
     public String edit() {
-        
+
         try {
             obj = facade.edit(obj);
             msg = "Se actualizó el registro con éxito ";
-            //Redireccionando
-            return facesUtil.getFacesParamValue("redirectRule_");
+            setSuccessful(true);
         } catch (Exception e) {
             msgErr = "FALLA, actualizando registro ! =>" + e.toString();
         }
@@ -90,11 +90,11 @@ public class CompanyController extends EntityControl implements EntityControlInt
 
     @Override
     public String create() {
-        
+
         try {
             facade.create(obj);
-            facesUtil.redirect("detail/company.xhtml?" + this.getEntityID() + "_=" + obj.getIdcompany());
-            msg = "Registro realizado correctamente!";
+            msg = "¡Registro realizado correctamente!";
+            setSuccessful(true);
         } catch (Exception e) {
             msgErr = "FALLA, creando Compañía !" + e;
             e.printStackTrace();
@@ -105,22 +105,44 @@ public class CompanyController extends EntityControl implements EntityControlInt
 
     @Override
     public int getCountQueryObj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setTotalCount(facade.searchFullTextCount(queryVal));
+        return getTotalCount();
     }
 
     @Override
     public String getQueryObjects() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Integer pag = facesUtil.getFacesParamInteger("pag_");
+        if (pag == null) {
+            pag = 0;
+        }
+        String busqueda = facesUtil.getFacesParamValue("busq_");
+        //Buscando con Postgres
+        setLst(facade.searchFullTextList(busqueda, false, this.getMaxRegList() * pag, this.getMaxRegList()));
+        return null;
     }
 
     @Override
     public SelectItem[] getAllSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Company> l = facade.findAllOrderDesc("fechaActa");
+        return getSelectItem(l).toArray(new SelectItem[0]);
+    }
+
+    private List<SelectItem> getSelectItem(List<Company> list) {
+        SelectItem sel = new SelectItem(null, "----------");
+
+        List lstC = new ArrayList();
+        lstC.add(sel);
+
+        for (Company c : list) {
+            sel = new SelectItem(c, c.getCompName());
+            lstC.add(sel);
+        }
+        return lstC;
     }
 
     @Override
     public List autoComplete(String query) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return facade.searchFullTextList(query, false, 0, this.maxRegList);
     }
 
 }

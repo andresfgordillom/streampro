@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../_listtemp.xhtml">
+
+            <ui:define name="app.content.list._listtemplate.content">
+
+                <h:outputText value="#{playlistController.objectById}"/>
+                <br/>
+                <font class="fa fa-book fa-2x" color="#08088A" size="5"><b>  #{playlistController.obj.listTitle}</b></font>
+                <br/><br/>
+                <h:form>
+                    <div align="center">
+                        <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-6,ui-grid-col-6">
+
+                            <h:panelGroup>
+                                <h:commandLink action="app.list.detail.list">
+                                    <h:outputText styleClass="fa fa-check" value="Detalle"/>
+                                    <f:param name="idplaylist_" value="#{param.idplaylist_}"/>
+                                </h:commandLink>
+                            </h:panelGroup>
+
+                            <h:panelGroup>
+                                <h:commandLink action="app.list.detail.edit">
+                                    <h:outputText styleClass="fa fa-edit" value="Editar"/>
+                                    <f:param name="idplaylist_" value="#{param.idplaylist_}"/>
+                                </h:commandLink>
+                            </h:panelGroup>
+
+                        </p:panelGrid>
+                    </div>
+                </h:form>
+
+                <ui:insert name="app.content.list.detail._listtemplate.content">app.content.list.detail._listtemplate.content</ui:insert>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

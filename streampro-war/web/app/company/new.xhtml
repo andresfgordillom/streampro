@@ -10,9 +10,6 @@
         <ui:composition template="./_comptemp.xhtml">
 
             <ui:define name="app.content.company._comptemplate.content">
-                
-                <h:outputText value="#{companyController.msg}" styleClass="ok"/>
-                <h:outputText value="#{companyController.msgErr}" styleClass="warning"/>
 
                 <div class="ui-g">
                     <div class="ui-g-0 ui-md-0 ui-lg-2"/>
@@ -43,13 +40,19 @@
                                 <center>
                                     <p:commandButton icon="fa fa-save" ajax="false" value="Guardar" 
                                                      action="#{companyController.create}"/>
+
+                                    <h:panelGroup rendered="#{companyController.successful}">
+                                        <script type="text/javascript">
+                                            setTimeout("document.location.href='http://#{utilControl.hostPortContext}/app/company/detail/company.xhtml?idcompany_=#{companyController.obj.idcompany}';", 500);
+                                        </script>
+                                    </h:panelGroup>
                                 </center>
                             </p:panel>
                         </h:form>
                     </div>
                     <div class="ui-g-0 ui-md-0 ui-lg-2"/>
                 </div>
-                
+
             </ui:define>
 
         </ui:composition>

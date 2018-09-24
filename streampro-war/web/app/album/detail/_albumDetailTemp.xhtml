@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../_albumtemp.xhtml">
+
+            <ui:define name="app.content.album._albumtemplate.content">
+
+                <h:outputText value="#{albumController.objectById}"/>
+                <br/>
+                <font class="fa fa-book fa-2x" color="#08088A" size="5"><b>  #{albumController.obj.title}</b></font>
+                <br/><br/>
+                <h:form>
+                    <div align="center">
+                        <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-6,ui-grid-col-6">
+
+                            <h:panelGroup>
+                                <h:commandLink action="app.album.detail.album">
+                                    <h:outputText styleClass="fa fa-check" value="Detalle"/>
+                                    <f:param name="idalbum_" value="#{param.idalbum_}"/>
+                                </h:commandLink>
+                            </h:panelGroup>
+
+                            <h:panelGroup>
+                                <h:commandLink action="app.album.detail.edit">
+                                    <h:outputText styleClass="fa fa-edit" value="Editar"/>
+                                    <f:param name="idalbum_" value="#{param.idalbum_}"/>
+                                </h:commandLink>
+                            </h:panelGroup>
+
+                        </p:panelGrid>
+                    </div>
+                </h:form>
+
+                <ui:insert name="app.content.album.detail._albumtemplate.content">app.content.album.detail._albumtemplate.content</ui:insert>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

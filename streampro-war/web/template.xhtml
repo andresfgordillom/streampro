@@ -23,27 +23,31 @@
         <div class="layout-wrapper layout-overlay-menu">
             <ui:include src="./topbar.xhtml" />
             <ui:include src="./menu.xhtml" />
-            
+
             <div class="layout-main">
                 <div class="layout-main-content">
                     <ui:insert name="content"/>
                     
+                    <div class="ui-g-12">
+                        <h:outputText value="#{utilControl.msg}" escape="false"/>
+                    </div>
+
                     <ui:include src="./footer.xhtml" />
                 </div>
-                
+
             </div>
         </div>
-        
-        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
-           <f:facet name="start">
-               <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
-           </f:facet>
 
-           <f:facet name="complete">
-               <h:outputText value="" />
-           </f:facet>
-       </p:ajaxStatus>
-        
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+            <f:facet name="start">
+                <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+            </f:facet>
+
+            <f:facet name="complete">
+                <h:outputText value="" />
+            </f:facet>
+        </p:ajaxStatus>
+
         <h:outputStylesheet name="css/nanoscroller.css" library="barcelona-layout" />
         <h:outputStylesheet name="css/animate.css" library="barcelona-layout" />
         <h:outputStylesheet name="css/ripple.css" library="barcelona-layout" />

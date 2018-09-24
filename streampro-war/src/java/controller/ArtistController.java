@@ -75,12 +75,11 @@ public class ArtistController extends EntityControl implements EntityControlInte
 
     @Override
     public String edit() {
-        
+
         try {
             obj = facade.edit(obj);
             msg = "Se actualizó el registro con éxito ";
-            //Redireccionando
-            return facesUtil.getFacesParamValue("redirectRule_");
+            setSuccessful(true);
         } catch (Exception e) {
             msgErr = "FALLA, actualizando registro ! =>" + e.toString();
         }
@@ -90,13 +89,13 @@ public class ArtistController extends EntityControl implements EntityControlInte
 
     @Override
     public String create() {
-        
+
         try {
             facade.create(obj);
-            facesUtil.redirect("detail/artist.xhtml?" + this.getEntityID() + "_=" + obj.getIdartist());
-            msg = "Registro realizado correctamente!";
+            msg = "¡Registro realizado correctamente!";
+            setSuccessful(true);
         } catch (Exception e) {
-            msgErr = "FALLA, creando artista !" + e;
+            msgErr = "FALLA, creando Artista !" + e;
             e.printStackTrace();
         }
 

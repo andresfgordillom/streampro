@@ -75,12 +75,11 @@ public class CountryController extends EntityControl implements EntityControlInt
 
     @Override
     public String edit() {
-        
+
         try {
             obj = facade.edit(obj);
             msg = "Se actualizó el registro con éxito ";
-            //Redireccionando
-            return facesUtil.getFacesParamValue("redirectRule_");
+            setSuccessful(true);
         } catch (Exception e) {
             msgErr = "FALLA, actualizando registro ! =>" + e.toString();
         }
@@ -90,11 +89,11 @@ public class CountryController extends EntityControl implements EntityControlInt
 
     @Override
     public String create() {
-        
+
         try {
             facade.create(obj);
-            facesUtil.redirect("detail/country.xhtml?" + this.getEntityID() + "_=" + obj.getIdcountry());
-            msg = "Registro realizado correctamente!";
+            msg = "¡Registro realizado correctamente!";
+            setSuccessful(true);
         } catch (Exception e) {
             msgErr = "FALLA, creando País !" + e;
             e.printStackTrace();
