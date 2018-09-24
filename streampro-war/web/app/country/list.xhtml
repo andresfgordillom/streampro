@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_countemp.xhtml">
+
+            <ui:define name="app.content.country._countemplate.content">
+                
+                <h:outputText value="#{countryController.allObjects}"/><!-- Importante -->
+                
+                <div align="center">
+                    
+                    <!-- Pagination -->
+                    <link type="text/css" rel="stylesheet" href="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepagination/simplePagination.css"/>
+                    <script type="text/javascript" src="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepagination/jquery.simplePagination.js"></script>
+                    <!-- Pagination -->
+
+                    <p:panel header="Lista de Países">
+                        <br/>
+                        <div align="right">
+                            <i><h:outputText value="Registros Encontrados: "/></i>
+                            <b> <h:outputText value="#{countryController.countAllObjects}"/> </b>
+                        </div>
+                        <br/>
+
+                        <h:panelGroup>
+
+                            <div id="list_">
+                            </div>
+                            <br/><br/>
+
+                            <div id="pag_" align="right">
+                            </div>
+                            <script type="text/javascript" src="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepag.js"></script>
+                            <script type="text/javascript">
+                                var objPag_ = new simplepag_(#{countryController.totalCount},#{countryController.maxRegList}, "pag_", "list_", "http://#{utilControl.hostPortContext}/app/country/listPag.xhtml");
+                            </script>
+                        </h:panelGroup>
+
+                    </p:panel>
+                    <br/><br/><br/>
+
+                </div>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

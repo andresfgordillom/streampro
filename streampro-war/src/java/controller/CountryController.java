@@ -8,6 +8,7 @@ import entity.Country;
 import facade.CountryFacade;
 import general.EntityControl;
 import interfaces.EntityControlInterface;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -32,7 +33,7 @@ public class CountryController extends EntityControl implements EntityControlInt
         this.setFirstRegList(0);
         this.setMaxRegList(25);
         this.setOrderBy("countryName");
-        this.setAscDesc("DESC");
+        this.setAscDesc("ASC");
         this.setEntityID("idcountry");
     }
 
@@ -104,22 +105,44 @@ public class CountryController extends EntityControl implements EntityControlInt
 
     @Override
     public int getCountQueryObj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setTotalCount(facade.searchFullTextCount(queryVal));
+        return getTotalCount();
     }
 
     @Override
     public String getQueryObjects() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Integer pag = facesUtil.getFacesParamInteger("pag_");
+        if (pag == null) {
+            pag = 0;
+        }
+        String busqueda = facesUtil.getFacesParamValue("busq_");
+        //Buscando con Postgres
+        setLst(facade.searchFullTextList(busqueda, false, this.getMaxRegList() * pag, this.getMaxRegList()));
+        return null;
     }
 
     @Override
     public SelectItem[] getAllSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Country> l = facade.findAllOrderDesc("countryName");
+        return getSelectItem(l).toArray(new SelectItem[0]);
+    }
+
+    private List<SelectItem> getSelectItem(List<Country> list) {
+        SelectItem sel = new SelectItem(null, "----------");
+
+        List lstC = new ArrayList();
+        lstC.add(sel);
+
+        for (Country c : list) {
+            sel = new SelectItem(c, c.getCountryName());
+            lstC.add(sel);
+        }
+        return lstC;
     }
 
     @Override
     public List autoComplete(String query) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return facade.searchFullTextList(query, false, 0, this.maxRegList);
     }
 
 }

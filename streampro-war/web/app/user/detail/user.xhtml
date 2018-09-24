@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_userDetailTemp.xhtml">
+
+            <ui:define name="app.content.user.detail._usertemplate.content">
+
+                <div align="center">
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">Detalle</f:facet>
+
+                        <p:outputLabel value="Id"/>
+                        <p:outputLabel value="#{userController.obj.iduser}"/>
+
+                        <p:outputLabel value="Usuario"/>
+                        <p:outputLabel value="#{userController.obj.nickname}"/>
+
+                        <p:outputLabel value="Nombres"/>
+                        <p:outputLabel value="#{userController.obj.names}"/>
+
+                        <p:outputLabel value="Apellidos"/>
+                        <p:outputLabel value="#{userController.obj.lastnames}"/>
+
+                        <p:outputLabel value="Cliente"/>
+                        <h:panelGroup>
+                            <p:outputLabel value="Sí" rendered="#{userController.obj.esCliente}" style="color: darkgreen"/>
+                            <p:outputLabel value="NO" rendered="#{!userController.obj.esCliente}" style="color: red"/>
+                        </h:panelGroup>
+                        
+                        <p:outputLabel value="Compañía" rendered="#{userController.obj.idcompany != null}" />
+                        <h:panelGroup rendered="#{userController.obj.idcompany != null}" >
+                            <p:outputLabel value="#{userController.obj.idcompany.compName}"/>
+                        </h:panelGroup>
+
+                    </p:panelGrid>
+
+                    <br/><br/><br/>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

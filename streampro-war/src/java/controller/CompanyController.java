@@ -33,7 +33,7 @@ public class CompanyController extends EntityControl implements EntityControlInt
         this.setFirstRegList(0);
         this.setMaxRegList(25);
         this.setOrderBy("compName");
-        this.setAscDesc("DESC");
+        this.setAscDesc("ASC");
         this.setEntityID("idcompany");
     }
 
@@ -123,7 +123,7 @@ public class CompanyController extends EntityControl implements EntityControlInt
 
     @Override
     public SelectItem[] getAllSelect() {
-        List<Company> l = facade.findAllOrderDesc("fechaActa");
+        List<Company> l = facade.findAllOrderDesc("compName");
         return getSelectItem(l).toArray(new SelectItem[0]);
     }
 

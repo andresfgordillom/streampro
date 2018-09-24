@@ -2,11 +2,13 @@ package facade;
 
 import entity.Song;
 import general.AbstractFacade;
+import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import util.StringUtil;
 
 @Stateless
 public class SongFacade extends AbstractFacade<Song> {
@@ -51,6 +53,20 @@ public class SongFacade extends AbstractFacade<Song> {
     public List<Song> listAll(String attr_order, String ascDesc, int firstReg, int maxReg) {
         String hql = this.queryAll(false, attr_order, ascDesc);
         return this.find(hql, false, firstReg, maxReg);
+    }
+
+    public int searchFullTextCount(String valBusq) {
+        String sql = "SELECT count(*)"
+                + " FROM song"
+                + " WHERE to_tsvector(idsong||' '||title)@@to_tsquery('" + new StringUtil().reemplazaEspacios(valBusq, "&").trim() + "')";
+        return numFromSQL(sql, new BigInteger("0")).intValue();
+    }
+
+    public List<Song> searchFullTextList(String valBusq, boolean allReg, int firstReg, int maxReg) {
+        String sql = "SELECT *"
+                + " FROM song"
+                + " WHERE to_tsvector(idsong||' '||title)@@to_tsquery('" + new StringUtil().reemplazaEspacios(valBusq, "&").trim() + "')";
+        return this.findNative(sql, allReg, firstReg, maxReg, Song.class);
     }
 
 }

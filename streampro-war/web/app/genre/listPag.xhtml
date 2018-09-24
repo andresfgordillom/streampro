@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../_templateEmbed.xhtml">
+
+            <ui:define name="content.embed">
+
+                <h:outputText value="#{genreController.allObjects}"/>
+
+                <div align="center">
+                    <p:dataTable reflow="true" var="lst" value="#{genreController.lst}" tableStyle="width:auto"
+                                 emptyMessage="No se encontraron registros.">
+
+                        <p:column headerText="Nombre">
+                            <h:outputLink value="http://#{utilControl.hostPortContext}/app/genre/detail/genre.xhtml">
+                                <f:param name="idgenre_" value="#{lst.idgenre}" />                         
+                                <h:outputText value="#{lst.genreName}"/>
+                            </h:outputLink>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -8,6 +8,7 @@ import entity.Song;
 import facade.SongFacade;
 import general.EntityControl;
 import interfaces.EntityControlInterface;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -32,7 +33,7 @@ public class SongController extends EntityControl implements EntityControlInterf
         this.setFirstRegList(0);
         this.setMaxRegList(25);
         this.setOrderBy("title");
-        this.setAscDesc("DESC");
+        this.setAscDesc("ASC");
         this.setEntityID("idsong");
     }
 
@@ -104,22 +105,44 @@ public class SongController extends EntityControl implements EntityControlInterf
 
     @Override
     public int getCountQueryObj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setTotalCount(facade.searchFullTextCount(queryVal));
+        return getTotalCount();
     }
 
     @Override
     public String getQueryObjects() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Integer pag = facesUtil.getFacesParamInteger("pag_");
+        if (pag == null) {
+            pag = 0;
+        }
+        String busqueda = facesUtil.getFacesParamValue("busq_");
+        //Buscando con Postgres
+        setLst(facade.searchFullTextList(busqueda, false, this.getMaxRegList() * pag, this.getMaxRegList()));
+        return null;
     }
 
     @Override
     public SelectItem[] getAllSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Song> l = facade.findAllOrderDesc("title");
+        return getSelectItem(l).toArray(new SelectItem[0]);
+    }
+
+    private List<SelectItem> getSelectItem(List<Song> list) {
+        SelectItem sel = new SelectItem(null, "----------");
+
+        List lstS = new ArrayList();
+        lstS.add(sel);
+
+        for (Song l : list) {
+            sel = new SelectItem(l, l.getTitle());
+            lstS.add(sel);
+        }
+        return lstS;
     }
 
     @Override
     public List autoComplete(String query) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return facade.searchFullTextList(query, false, 0, this.maxRegList);
     }
 
 }

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../_templateEmbed.xhtml">
+
+            <ui:define name="content.embed">
+
+                <h:outputText value="#{userController.allObjects}"/>
+
+                <div align="center">
+                    <p:dataTable reflow="true" var="lst" value="#{userController.lst}" tableStyle="width:auto"
+                                 emptyMessage="No se encontraron registros.">
+
+                        <p:column headerText="Usuario">
+                            <h:outputLink value="http://#{utilControl.hostPortContext}/app/user/detail/user.xhtml">
+                                <f:param name="iduser_" value="#{lst.iduser}" />                         
+                                <h:outputText value="#{lst.nickname}"/>
+                            </h:outputLink>
+                        </p:column>
+
+                        <p:column headerText="Nombre Real">
+                            <h:outputText value="#{lst.names} #{lst.lastnames}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Cliente">
+                            <h:outputText value="Sí" rendered="#{lst.esCliente}" style="color: darkgreen"/>
+                            <h:outputText value="NO" rendered="#{!lst.esCliente}" style="color: red"/>
+                        </p:column>
+                        
+                        <p:column headerText="Compañía">
+                            <h:outputText value="#{lst.idcompany.compName}" rendered="#{lst.idcompany != null}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

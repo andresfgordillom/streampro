@@ -8,6 +8,7 @@ import entity.Playlist;
 import facade.PlaylistFacade;
 import general.EntityControl;
 import interfaces.EntityControlInterface;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -32,7 +33,7 @@ public class PlaylistController extends EntityControl implements EntityControlIn
         this.setFirstRegList(0);
         this.setMaxRegList(25);
         this.setOrderBy("title");
-        this.setAscDesc("DESC");
+        this.setAscDesc("ASC");
         this.setEntityID("idplaylist");
     }
 
@@ -104,22 +105,44 @@ public class PlaylistController extends EntityControl implements EntityControlIn
 
     @Override
     public int getCountQueryObj() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setTotalCount(facade.searchFullTextCount(queryVal));
+        return getTotalCount();
     }
 
     @Override
     public String getQueryObjects() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Integer pag = facesUtil.getFacesParamInteger("pag_");
+        if (pag == null) {
+            pag = 0;
+        }
+        String busqueda = facesUtil.getFacesParamValue("busq_");
+        //Buscando con Postgres
+        setLst(facade.searchFullTextList(busqueda, false, this.getMaxRegList() * pag, this.getMaxRegList()));
+        return null;
     }
 
     @Override
     public SelectItem[] getAllSelect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Playlist> l = facade.findAllOrderDesc("listTitle");
+        return getSelectItem(l).toArray(new SelectItem[0]);
+    }
+
+    private List<SelectItem> getSelectItem(List<Playlist> list) {
+        SelectItem sel = new SelectItem(null, "----------");
+
+        List lstL = new ArrayList();
+        lstL.add(sel);
+
+        for (Playlist l : list) {
+            sel = new SelectItem(l, l.getListTitle());
+            lstL.add(sel);
+        }
+        return lstL;
     }
 
     @Override
     public List autoComplete(String query) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return facade.searchFullTextList(query, false, 0, this.maxRegList);
     }
 
 }

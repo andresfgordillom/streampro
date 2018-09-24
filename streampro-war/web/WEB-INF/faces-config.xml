@@ -8,12 +8,10 @@
         <component-type>org.primefaces.component.BarcelonaMenu</component-type>
         <component-class>org.primefaces.barcelona.component.Menu</component-class>
     </component>
-    
     <component>
         <component-type>org.primefaces.component.BarcelonaTabMenu</component-type>
         <component-class>org.primefaces.barcelona.component.TabMenu</component-class>
     </component>
-    
     <component>
         <component-type>org.primefaces.component.BarcelonaTab</component-type>
         <component-class>org.primefaces.barcelona.component.Tab</component-class>
@@ -32,12 +30,14 @@
         </renderer>
     </render-kit>
         
-    <!-- Reglas de Navegacion-->
+    <!-- Reglas de Navegacion -->
     <navigation-rule>
+        <!-- HOME -->
         <navigation-case>
             <from-outcome>home</from-outcome>
             <to-view-id>index.xhtml</to-view-id>
         </navigation-case>
+        <!-- ALBUM -->
         <navigation-case>
             <from-outcome>app.album.list</from-outcome>
             <to-view-id>/app/album/list.xhtml</to-view-id>
@@ -51,11 +51,53 @@
             <to-view-id>/app/album/search.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
+            <from-outcome>app.album.detail.album</from-outcome>
+            <to-view-id>/app/album/detail/album.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.album.detail.edit</from-outcome>
+            <to-view-id>/app/album/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.album.detail.songs</from-outcome>
+            <to-view-id>/app/album/detail/songs.xhtml</to-view-id>
+        </navigation-case>
+        <!-- ARTIST -->
+        <navigation-case>
+            <from-outcome>app.artist.list</from-outcome>
+            <to-view-id>/app/artist/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.new</from-outcome>
+            <to-view-id>/app/artist/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.search</from-outcome>
+            <to-view-id>/app/artist/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.detail.artist</from-outcome>
+            <to-view-id>/app/artist/detail/artist.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.detail.edit</from-outcome>
+            <to-view-id>/app/artist/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.detail.albums</from-outcome>
+            <to-view-id>/app/artist/detail/albums.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.detail.songs</from-outcome>
+            <to-view-id>/app/artist/detail/songs.xhtml</to-view-id>
+        </navigation-case>
+        <!-- COMPANY -->
+        <navigation-case>
             <from-outcome>app.company.list</from-outcome>
             <to-view-id>/app/company/list.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-             <from-outcome>app.company.new</from-outcome>
+            <from-outcome>app.company.new</from-outcome>
             <to-view-id>/app/company/new.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
@@ -69,6 +111,127 @@
         <navigation-case>
             <from-outcome>app.company.detail.edit</from-outcome>
             <to-view-id>/app/company/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.detail.albums</from-outcome>
+            <to-view-id>/app/artist/detail/albums.xhtml</to-view-id>
+        </navigation-case>
+        <!-- COUNTRY -->
+        <navigation-case>
+            <from-outcome>app.country.list</from-outcome>
+            <to-view-id>/app/country/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.country.new</from-outcome>
+            <to-view-id>/app/country/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.country.search</from-outcome>
+            <to-view-id>/app/country/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.country.detail.country</from-outcome>
+            <to-view-id>/app/country/detail/country.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.country.detail.edit</from-outcome>
+            <to-view-id>/app/country/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.artist.detail.artists</from-outcome>
+            <to-view-id>/app/artist/detail/artists.xhtml</to-view-id>
+        </navigation-case>
+        <!-- GENRE -->
+        <navigation-case>
+            <from-outcome>app.genre.list</from-outcome>
+            <to-view-id>/app/genre/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.genre.new</from-outcome>
+            <to-view-id>/app/genre/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.genre.search</from-outcome>
+            <to-view-id>/app/genre/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.genre.detail.genre</from-outcome>
+            <to-view-id>/app/genre/detail/genre.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.genre.detail.edit</from-outcome>
+            <to-view-id>/app/genre/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- PLAYLIST -->
+        <navigation-case>
+            <from-outcome>app.playlist.list</from-outcome>
+            <to-view-id>/app/playlist/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.playlist.new</from-outcome>
+            <to-view-id>/app/playlist/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.playlist.search</from-outcome>
+            <to-view-id>/app/playlist/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.playlist.detail.playlist</from-outcome>
+            <to-view-id>/app/playlist/detail/playlist.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.playlist.detail.edit</from-outcome>
+            <to-view-id>/app/playlist/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.playlist.detail.songs</from-outcome>
+            <to-view-id>/app/playlist/detail/songs.xhtml</to-view-id>
+        </navigation-case>
+        <!-- SONG -->
+        <navigation-case>
+            <from-outcome>app.song.list</from-outcome>
+            <to-view-id>/app/song/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.song.new</from-outcome>
+            <to-view-id>/app/song/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.song.search</from-outcome>
+            <to-view-id>/app/song/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.song.detail.song</from-outcome>
+            <to-view-id>/app/song/detail/song.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.song.detail.edit</from-outcome>
+            <to-view-id>/app/song/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <!-- USER -->
+        <navigation-case>
+            <from-outcome>app.user.list</from-outcome>
+            <to-view-id>/app/user/list.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.user.new</from-outcome>
+            <to-view-id>/app/user/new.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.user.search</from-outcome>
+            <to-view-id>/app/user/search.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.user.detail.user</from-outcome>
+            <to-view-id>/app/user/detail/user.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.user.detail.edit</from-outcome>
+            <to-view-id>/app/user/detail/edit.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>app.user.detail.edit</from-outcome>
+            <to-view-id>/app/user/detail/playlists.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>                    

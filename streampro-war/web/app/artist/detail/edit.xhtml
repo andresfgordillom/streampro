@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_artstDetailTemp.xhtml">
+
+            <ui:define name="app.content.artist.detail._artstemplate.content">
+
+                <div class="ui-g">
+                    <div class="ui-g-0 ui-md-0 ui-lg-2"/>
+                    <div class="ui-g-12 ui-md-12 ui-lg-8">
+                        <h:form id="ff_">
+                            <div class="ui-fluid">
+                                <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-9">
+                                    <f:facet name="header">Editar</f:facet>
+
+                                    <p:outputLabel for="stageName_" value="Nombre"/>
+                                    <h:panelGroup>
+                                        <p:inputText id="stageName_" size="35" required="true" requiredMessage="¡Requerido!" 
+                                                     value="#{artistController.obj.stageName}"/>
+                                        <p:message for="stageName_"/>
+                                    </h:panelGroup>
+
+                                    <p:outputLabel for="idcountry_" value="Paìs"/>
+                                    <h:panelGroup>
+                                        <p:autoComplete id="idcountry_" required="true" requiredMessage="¡Requerido!" 
+                                                        value="#{artistController.obj.idcountry}" 
+                                                        completeMethod="#{countryController.autoComplete}"  
+                                                        styleClass="autocomplete_" var="c" 
+                                                        itemLabel="#{c.countryName}" forceSelection="true"
+                                                        itemValue="#{c}" size="25" />
+                                        <p:message for="idcountry_"/>
+                                    </h:panelGroup>
+
+                                </p:panelGrid>
+
+                                <h:inputHidden value="#{artistController.obj.idartist}"/>
+
+                                <br/>
+                                <center>
+                                    <p:commandButton action="#{artistController.edit}" icon="fa fa-save" ajax="false" value="Guardar">
+                                        <f:param name="idartist_" value="#{param.idartist_}"/>
+                                    </p:commandButton>
+
+                                    <h:panelGroup rendered="#{artistController.successful}">
+                                        <script type="text/javascript">
+                                            setTimeout("document.location.href='http://#{utilControl.hostPortContext}/app/artist/detail/artist.xhtml?idartist_=#{artistController.obj.idartist}';", 500);
+                                        </script>
+                                    </h:panelGroup>
+                                </center>
+
+                                <br/><br/><br/>
+
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-0 ui-md-0 ui-lg-2"/>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

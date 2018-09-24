@@ -8,22 +8,19 @@
 
     <body>
 
-        <ui:composition template="./_compDetailTemp.xhtml">
+        <ui:composition template="./_genreDetailTemp.xhtml">
 
-            <ui:define name="app.content.company.detail._comptemplate.content">
+            <ui:define name="app.content.genre.detail._genretemplate.content">
 
                 <div align="center">
                     <p:panelGrid columns="2">
                         <f:facet name="header">Detalle</f:facet>
 
                         <p:outputLabel value="Id"/>
-                        <p:outputLabel value="#{companyController.obj.idcompany}"/>
-                        
+                        <p:outputLabel value="#{genreController.obj.idgenre}"/>
+
                         <p:outputLabel value="Nombre"/>
-                        <p:outputLabel value="#{companyController.obj.compName}"/>
-                        
-                        <p:outputLabel value="Identificador"/>
-                        <p:outputLabel value="#{companyController.obj.identificator}"/>
+                        <p:outputLabel value="#{genreController.obj.genreName}"/>
 
                     </p:panelGrid>
 

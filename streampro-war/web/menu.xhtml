@@ -5,52 +5,66 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui"
     xmlns:pa="http://primefaces.org/barcelona">
-    
+
     <div class="layout-sidebar">
         <pa:tabMenu>
-            <pa:tab icon="library_music" title="Albums">
+            <pa:tab icon="group" title="Artistas">
+                <h:form id="menu-art">
+                    <pa:menu widgetVar="ar">
+                        <p:menuitem id="li_ar" value="List" icon="&#xE880;" action="app.artist.list" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="library_music" title="Álbumes">
                 <h:form id="menu-album">
                     <pa:menu widgetVar="al">
                         <p:menuitem id="li_al" value="List" icon="&#xE869;" action="app.album.list" ajax="false" />
                     </pa:menu>
                 </h:form>
             </pa:tab>
-            <pa:tab icon="domain" title="Companies">
+            <pa:tab icon="queue_music" title="Listas">
+                <h:form id="menu-playl">
+                    <pa:menu widgetVar="pl">
+                        <p:menuitem id="li_pl" value="List" icon="&#xE880;" action="app.playlist.list" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="music_note" title="Canciones">
+                <h:form id="menu-canc">
+                    <pa:menu widgetVar="ca">
+                        <p:menuitem id="li_ca" value="List" icon="&#xE880;" action="app.song.list" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="music_video" title="Géneros">
+                <h:form id="menu-genrs">
+                    <pa:menu widgetVar="ge">
+                        <p:menuitem id="li_ge" value="List" icon="&#xE880;" action="app.genre.list" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="domain" title="Compañías">
                 <h:form id="menu-comp">
                     <pa:menu widgetVar="co">
                         <p:menuitem id="li_co" value="List" icon="&#xE880;" action="app.company.list" ajax="false"/>
                     </pa:menu>
                 </h:form>
             </pa:tab>
-            <pa:tab icon="group" title="Artists">
-                <h:form id="menu-art">
-                    <pa:menu widgetVar="co">
-                        <p:menuitem id="li_ar" value="List" icon="&#xE880;" ajax="false"/>
-                    </pa:menu>
-                </h:form>
-            </pa:tab>
-            <pa:tab icon="music_note" title="Songs">
-                <h:form id="menu-canc">
-                    <pa:menu widgetVar="co">
-                        <p:menuitem id="li_ca" value="List" icon="&#xE880;" ajax="false"/>
-                    </pa:menu>
-                </h:form>
-            </pa:tab>
-            <pa:tab icon="queue_music" title="Playlists">
-                <h:form id="menu-playl">
-                    <pa:menu widgetVar="co">
-                        <p:menuitem id="li_pl" value="List" icon="&#xE880;" ajax="false"/>
-                    </pa:menu>
-                </h:form>
-            </pa:tab>
-            <pa:tab icon="contacts" title="Users">
+            <pa:tab icon="contacts" title="Usuarios">
                 <h:form id="menu-usrs">
-                    <pa:menu widgetVar="co">
-                        <p:menuitem id="li_us" value="List" icon="&#xE880;" ajax="false"/>
+                    <pa:menu widgetVar="us">
+                        <p:menuitem id="li_us" value="List" icon="&#xE880;" action="app.user.list" ajax="false"/>
+                    </pa:menu>
+                </h:form>
+            </pa:tab>
+            <pa:tab icon="place" title="Países">
+                <h:form id="menu-counts">
+                    <pa:menu widgetVar="cn">
+                        <p:menuitem id="li_cn" value="List" icon="&#xE880;" action="app.country.list" ajax="false"/>
                     </pa:menu>
                 </h:form>
             </pa:tab>
         </pa:tabMenu>        
     </div>
-    
+
 </ui:composition>

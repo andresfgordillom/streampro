@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./_usertemp.xhtml">
+
+            <ui:define name="app.content.user._usertemplate.content">
+
+                <!-- Pagination -->
+                <link type="text/css" rel="stylesheet" href="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepagination/simplePagination.css"/>
+                <script type="text/javascript" src="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepagination/jquery.simplePagination.js"></script>
+                <!-- Pagination -->
+
+                <h:panelGroup rendered="#{param.busq_!=null and param.busq_!=''}">
+                    <h:outputText value="#{userController.setQueryVal(param.busq_)}"/>
+                </h:panelGroup>
+
+                <div align="center">
+                    <p:panel header="Buscar Usuario">
+                        <br/>
+                        <h:form id="fo_">
+                            <b style="color:gray"> Nombre</b>
+                            <br/><br/>
+                            <p:inputText value="#{userController.queryVal}" size="30" id="busq_"/>
+                            <br/><br/>
+                            <p:commandButton value="Buscar" icon="ui-icon-search" ajax="false"/>
+                            <br/>
+                        </h:form>
+                    </p:panel>
+                    <script type="text/javascript">
+                        document.getElementById('fo_:busq_').focus();
+                    </script>
+                    <br/>
+                    <h:panelGroup rendered="#{userController.queryVal!=null and userController.queryVal.trim()!=''}">
+                        <p:panel>
+                            <div align="right">
+                                <i>Resultados: </i> <h:outputText value="#{userController.countQueryObj}" style="font-weight: bold"/>
+                            </div>   
+                            <div align="left">
+                                <i>Criterio: </i><b>#{userController.queryVal}</b><br/>
+                            </div>
+                            <br/><br/>
+                            <div id="list_">
+                            </div>
+                            <br/><br/>
+
+                            <div id="pag_" align="right">
+                            </div>
+                            <script type="text/javascript" src="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepag.js"></script>
+                            <script type="text/javascript">
+                        var objPag_ = new simplepag_(#{userController.totalCount},#{userController.maxRegList}, "pag_", "list_", "http://#{utilControl.hostPortContext}/app/user/searchPag.xhtml?busq_=#{userController.queryVal}");
+                            </script>
+                        </p:panel>
+                    </h:panelGroup>
+                </div>
+
+                <br/><br/><br/>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

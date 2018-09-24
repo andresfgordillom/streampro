@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../_templateEmbed.xhtml">
+
+            <ui:define name="content.embed">
+
+                <h:outputText value="#{artistController.allObjects}"/>
+
+                <div align="center">
+                    <p:dataTable reflow="true" var="lst" value="#{artistController.lst}" tableStyle="width:auto"
+                                 emptyMessage="No se encontraron registros.">
+
+                        <p:column headerText="Nombre">
+                            <h:outputLink value="http://#{utilControl.hostPortContext}/app/artist/detail/artist.xhtml">
+                                <f:param name="idartist_" value="#{lst.idartist}" />                         
+                                <h:outputText value="#{lst.stageName}"/>
+                            </h:outputLink>
+                        </p:column>
+
+                        <p:column headerText="País">
+                            <h:outputText value="#{lst.idcountry.countryName}" rendered="#{lst.idcountry != null}"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

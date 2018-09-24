@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_genreDetailTemp.xhtml">
+
+            <ui:define name="app.content.genre.detail._genretemplate.content">
+
+                <div class="ui-g">
+                    <div class="ui-g-0 ui-md-0 ui-lg-2"/>
+                    <div class="ui-g-12 ui-md-12 ui-lg-8">
+                        <h:form id="ff_">
+                            <div class="ui-fluid">
+                                <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-9">
+                                    <f:facet name="header">Editar</f:facet>
+
+                                    <p:outputLabel for="genreName_" value="Nombre"/>
+                                    <p:inputText id="genreName_" size="20" required="true" requiredMessage="¡Requerido!" 
+                                                 value="#{genreController.obj.genreName}"/>
+
+                                </p:panelGrid>
+
+                                <h:inputHidden value="#{genreController.obj.idgenre}"/>
+
+                                <br/>
+                                <center>
+                                    <p:commandButton action="#{genreController.edit}" icon="fa fa-save" ajax="false" value="Guardar">
+                                        <f:param name="idgenre_" value="#{param.idgenre_}"/>
+                                    </p:commandButton>
+
+                                    <h:panelGroup rendered="#{genreController.successful}">
+                                        <script type="text/javascript">
+                                            setTimeout("document.location.href='http://#{utilControl.hostPortContext}/app/genre/detail/genre.xhtml?idgenre_=#{genreController.obj.idgenre}';", 500);
+                                        </script>
+                                    </h:panelGroup>
+                                </center>
+
+                                <br/><br/><br/>
+
+                            </div>
+                        </h:form>
+                    </div>
+                    <div class="ui-g-0 ui-md-0 ui-lg-2"/>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
