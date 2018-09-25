@@ -1,8 +1,11 @@
 package facade;
 
+import entity.Albumhasartist;
 import entity.Artist;
 import general.AbstractFacade;
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -69,4 +72,40 @@ public class ArtistFacade extends AbstractFacade<Artist> {
         return this.findNative(sql, allReg, firstReg, maxReg, Artist.class);
     }
 
+    public List<Artist> getMainArtistFromAlbum(Integer idalbum) {
+        String hql = "SELECT a.idartist"
+                + " FROM Albumhasartist a"
+                + " WHERE a.idalbum.idalbum = " + idalbum;
+        return this.find(hql, true, 0, 0);
+    }
+
+    public HashMap<Integer, List<Artist>> getMapAllMainArtists() {
+        HashMap<Integer, List<Artist>> resultMap = new HashMap<>();
+
+        String sql = "SELECT *"
+                + " FROM albumhasartist";
+        List<Albumhasartist> AhAs = findNative(sql, true, 0, 0, Albumhasartist.class);
+
+        for (Albumhasartist aha : AhAs) {
+            Integer idalb = aha.getIdalbum().getIdalbum();
+            if (!resultMap.containsKey(idalb)) {
+                resultMap.put(idalb, addArtistsToMapByIdAlbum(idalb, AhAs));
+            }
+        }
+
+        return resultMap;
+    }
+
+    private List<Artist> addArtistsToMapByIdAlbum(int idalbum, List<Albumhasartist> AhAs) {
+        List<Artist> artists = new ArrayList<>();
+
+        for (Albumhasartist aha : AhAs) {
+            int idalb = aha.getIdalbum().getIdalbum();
+            if (idalb == idalbum) {
+                artists.add(aha.getIdartist());
+            }
+        }
+
+        return artists;
+    }
 }

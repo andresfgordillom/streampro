@@ -5,10 +5,13 @@
 package controller;
 
 import entity.Album;
+import entity.Artist;
 import facade.AlbumFacade;
+import facade.ArtistFacade;
 import general.EntityControl;
 import interfaces.EntityControlInterface;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -25,7 +28,11 @@ public class AlbumController extends EntityControl implements EntityControlInter
 
     @EJB
     private AlbumFacade facade;
+    @EJB
+    private ArtistFacade artistFacade;
     Album obj = new Album();
+    List<Artist> mainArtists = new ArrayList<>();
+    HashMap<Integer, List<Artist>> allMainArtists = new HashMap<>();
 
     public AlbumController() {
         this.setEntityName("Album");
@@ -47,6 +54,22 @@ public class AlbumController extends EntityControl implements EntityControlInter
         this.obj = (Album) obj;
     }
 
+    public List<Artist> getMainArtists() {
+        return mainArtists;
+    }
+
+    public void setMainArtists(List<Artist> mainArtists) {
+        this.mainArtists = mainArtists;
+    }
+
+    public HashMap<Integer, List<Artist>> getAllMainArtists() {
+        return allMainArtists;
+    }
+
+    public void setAllMainArtists(HashMap<Integer, List<Artist>> allMainArtists) {
+        this.allMainArtists = allMainArtists;
+    }
+
     @Override
     public String getAllObjects() {
         Integer pag = facesUtil.getFacesParamInteger("pag_");
@@ -54,6 +77,7 @@ public class AlbumController extends EntityControl implements EntityControlInter
             pag = 0;
         }
         this.lst = facade.listAll(this.orderByCampo(), this.ascDesc(), pag * this.getMaxRegList(), this.getMaxRegList());
+        setAllMainArtists(artistFacade.getMapAllMainArtists());
         return "";
     }
 
@@ -65,7 +89,9 @@ public class AlbumController extends EntityControl implements EntityControlInter
 
     @Override
     public String getObjectById() {
-        this.obj = facade.find(facesUtil.getFacesParamInteger("idalbum_"));
+        Integer idalbum = facesUtil.getFacesParamInteger("idalbum_");
+        this.obj = facade.find(idalbum);
+        setMainArtists(artistFacade.getMainArtistFromAlbum(idalbum));
         return "";
     }
 
@@ -76,11 +102,21 @@ public class AlbumController extends EntityControl implements EntityControlInter
 
     @Override
     public String edit() {
-
         try {
-            obj = facade.edit(obj);
-            msg = "Se actualizó el registro con éxito ";
-            setSuccessful(true);
+            if (mainArtists.isEmpty()) {
+                msgErr = "¡Debe seleccionar al menos un artista!";
+                return null;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            facade.edit(obj, mainArtists, sb);
+
+            if (sb.toString().isEmpty()) {
+                msg = "¡Registro realizado correctamente!";
+                setSuccessful(true);
+            } else {
+                msgErr = "¡FALLA, creando Álbum !" + sb.toString();
+            }
         } catch (Exception e) {
             msgErr = "FALLA, actualizando registro ! =>" + e.toString();
         }
@@ -90,11 +126,21 @@ public class AlbumController extends EntityControl implements EntityControlInter
 
     @Override
     public String create() {
-
         try {
-            facade.create(obj);
-            msg = "¡Registro realizado correctamente!";
-            setSuccessful(true);
+            if (mainArtists.isEmpty()) {
+                msgErr = "¡Debe seleccionar al menos un artista!";
+                return null;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            facade.create(obj, mainArtists, sb);
+
+            if (sb.toString().isEmpty()) {
+                msg = "¡Registro realizado correctamente!";
+                setSuccessful(true);
+            } else {
+                msgErr = "¡FALLA, creando Álbum !" + sb.toString();
+            }
         } catch (Exception e) {
             msgErr = "FALLA, creando Álbum !" + e;
             e.printStackTrace();
@@ -143,6 +189,14 @@ public class AlbumController extends EntityControl implements EntityControlInter
     @Override
     public List autoComplete(String query) {
         return facade.searchFullTextList(query, false, 0, this.maxRegList);
+    }
+
+    public List<Artist> mainArtistsByIdAlbum(Integer idalbum) {
+        if (idalbum != null) {
+            return getAllMainArtists().get(idalbum);
+        }
+
+        return new ArrayList<>();
     }
 
 }

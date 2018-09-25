@@ -18,12 +18,36 @@
                     <p:dataTable reflow="true" var="lst" value="#{albumController.lst}" tableStyle="width:auto"
                                  emptyMessage="No se encontraron registros.">
 
-                        <p:column headerText="Id">
-                            <h:outputText value="#{lst.title}"/>
+                        <p:column headerText="Carátula">
+                            <p:graphicImage url="#{lst.coverpath}" height="70" width="70"/>
                         </p:column>
-                        
+
+                        <p:column headerText="Título">
+                            <h:outputLink value="http://#{utilControl.hostPortContext}/app/album/detail/album.xhtml">
+                                <f:param name="idalbum_" value="#{lst.idalbum}" />  
+                                <h:outputText value="#{lst.title}"/>
+                            </h:outputLink>
+                        </p:column>
+
+                        <p:column headerText="Artista Principal">
+                            <p:dataList value="#{albumController.mainArtistsByIdAlbum(lst.idalbum)}" 
+                                        var="a" type="ordered">
+                                #{a.stageName}
+                            </p:dataList>
+                        </p:column>
+
                         <p:column headerText="Lanzamiento">
-                            <h:outputText value="#{lst.date}"/>
+                            <h:outputText value="#{lst.date}">
+                                <f:convertDateTime pattern="yyyy-MMM-dd" />
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Género">
+                            <h:outputText value="#{lst.idgenre.genreName}"/>
+                        </p:column>
+
+                        <p:column headerText="Compañía">
+                            <h:outputText value="#{lst.idcompany.compName}"/>
                         </p:column>
 
                     </p:dataTable>

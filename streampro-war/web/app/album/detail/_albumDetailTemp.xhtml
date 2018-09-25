@@ -14,7 +14,13 @@
 
                 <h:outputText value="#{albumController.objectById}"/>
                 <br/>
-                <font class="fa fa-book fa-2x" color="#08088A" size="5"><b>  #{albumController.obj.title}</b></font>
+                <center><font class="fa fa-book fa-2x" color="#08088A" size="5"><b>  #{albumController.obj.title}</b></font></center>
+                <center>
+                    <font class="fa-lg" color="#08088A" size="5"><b>by</b></font>
+                    <p:repeat value="#{albumController.mainArtists}" var="a">
+                        <font class="fa-lg" color="#08088A" size="5"><b>  #{a.stageName},</b></font>
+                    </p:repeat>
+                </center>
                 <br/><br/>
                 <h:form>
                     <div align="center">

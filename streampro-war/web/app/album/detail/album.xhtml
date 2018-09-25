@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_albumDetailTemp.xhtml">
+
+            <ui:define name="app.content.album.detail._albumtemplate.content">
+
+                <div align="center">
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">Detalle</f:facet>
+
+                        <p:outputLabel value="Título"/>
+                        <p:outputLabel value="#{albumController.obj.title}"/>
+
+                        <p:outputLabel value="Carátula"/>
+                        <p:graphicImage url="#{albumController.obj.coverpath}" width="200" height="200"/>
+
+                        <p:outputLabel value="Artista Principal"/>
+                        <p:dataList value="#{albumController.mainArtists}" var="a" type="ordered">
+                            #{a.stageName}
+                        </p:dataList>
+
+                        <p:outputLabel value="Fecha de Lanzamiento"/>
+                        <p:outputLabel value="#{albumController.obj.date}">
+                            <f:convertDateTime pattern="yyyy-MMM-dd" />
+                        </p:outputLabel>
+
+                        <p:outputLabel value="Género"/>
+                        <p:outputLabel value="#{albumController.obj.idgenre.genreName}"/>
+
+                        <p:outputLabel value="Compañía"/>
+                        <p:outputLabel value="#{albumController.obj.idcompany.compName}"/>
+
+                    </p:panelGrid>
+
+                    <br/><br/><br/>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

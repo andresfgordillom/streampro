@@ -13,12 +13,81 @@
             <ui:define name="app.content.album._albumtemplate.content">
 
                 <div class="ui-g">
-                    <div class="ui-g-12">
-                        <div class="card">
-                            <h1>New Album</h1>
-                            <p>This page is to start with content.</p>
-                        </div>
+                    <div class="ui-g-0 ui-md-0 ui-lg-2"/>
+                    <div class="ui-g-12 ui-md-12 ui-lg-8">
+                        <h:form id="ff_"> 
+                            <p:panel header="Nuevo Álbum">
+                                <div class="ui-fluid">
+                                    <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-9" styleClass="ui-panelgrid-blank">
+
+                                        <p:outputLabel for="title_" value="Título"/>
+                                        <h:panelGroup>
+                                            <p:inputText id="title_" size="35" required="true" requiredMessage="¡Requerido!" 
+                                                         value="#{albumController.obj.title}"/>
+                                            <p:message for="title_"/>
+                                        </h:panelGroup>
+
+                                        <p:outputLabel for="artists_" value="Artistas Principales"/>   
+                                        <h:panelGroup>
+                                            <p:autoComplete id="artists_" multiple="true" value="#{albumController.mainArtists}" 
+                                                            completeMethod="#{artistController.autoComplete}" required="true" converter="artistConverter"
+                                                            var="a" itemLabel="#{a.stageName}" itemValue="#{a}" forceSelection="true"/> 
+                                            <p:message for="artists_"/>
+                                        </h:panelGroup>
+
+                                        <p:outputLabel for="coverpath_" value="URL Portada"/>
+                                        <h:panelGroup>
+                                            <p:inputText id="coverpath_" size="35" required="true" requiredMessage="¡Requerido!" 
+                                                         value="#{albumController.obj.coverpath}"/>
+                                            <p:message for="coverpath_"/>
+                                        </h:panelGroup>
+
+                                        <p:outputLabel for="date_" value="Fecha de Lanzamiento"/>
+                                        <h:panelGroup>
+                                            <p:calendar value="#{albumController.obj.date}" id="date_" requiredMessage="¡Requerido!" required="true" 
+                                                        pattern="yyyy-MM-dd" locale="es"
+                                                        showOn="button" showButtonPanel="true" navigator="true"/>
+                                            <p:message for="date_"/>
+                                        </h:panelGroup>
+
+                                        <p:outputLabel for="idgenre_" value="Género"/>
+                                        <h:panelGroup>
+                                            <p:selectOneMenu styleClass="selectBoxFull" id="idgenre_" value="#{albumController.obj.idgenre}" 
+                                                             requiredMessage="¡Requerido!" required="true" >
+                                                <f:selectItems value="#{genreController.allSelect}" />
+                                            </p:selectOneMenu>
+                                            <p:message for="idgenre_"/>
+                                        </h:panelGroup>
+
+                                        <p:outputLabel for="idcompany_" value="Compañía"/>
+                                        <h:panelGroup>
+                                            <p:autoComplete id="idcompany_" required="true" requiredMessage="¡Requerido!" 
+                                                            value="#{albumController.obj.idcompany}" 
+                                                            completeMethod="#{companyController.autoComplete}"  
+                                                            styleClass="autocomplete_" var="c" 
+                                                            itemLabel="#{c.compName}" forceSelection="true"
+                                                            itemValue="#{c}" size="25" />
+                                            <p:message for="idcompany_"/>
+                                        </h:panelGroup>
+
+                                    </p:panelGrid>
+                                </div>
+
+                                <br/>
+                                <center>
+                                    <p:commandButton icon="fa fa-save" ajax="false" value="Guardar" 
+                                                     action="#{albumController.create}"/>
+
+                                    <h:panelGroup rendered="#{albumController.successful}">
+                                        <script type="text/javascript">
+                                            setTimeout("document.location.href='http://#{utilControl.hostPortContext}/app/album/detail/album.xhtml?idalbum_=#{albumController.obj.idalbum}';", 500);
+                                        </script>
+                                    </h:panelGroup>
+                                </center>
+                            </p:panel>
+                        </h:form>
                     </div>
+                    <div class="ui-g-0 ui-md-0 ui-lg-2"/>
                 </div>
 
             </ui:define>

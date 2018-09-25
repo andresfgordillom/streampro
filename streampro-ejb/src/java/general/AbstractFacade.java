@@ -86,7 +86,7 @@ public abstract class AbstractFacade<T> {
             e.printStackTrace();
 
             rollbackTransaction();
-            System.out.println("FALLA, editando registro !" + e);
+            System.out.println("FALLA, creando registro !" + e);
 
             throw e;
         }
