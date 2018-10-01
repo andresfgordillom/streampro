@@ -12,7 +12,56 @@
 
             <ui:define name="app.content.album.detail._albumtemplate.content">
 
-                SONGS
+                <h:outputText value="#{albumController.songsByAlbum}" />
+
+                <h:form id="form">
+
+                    <br/><br/>
+                    <center>
+                        <p:button class="icoAdd" href="javascript:void();"  title="Agregar Canción" value="Agregar Canción..."
+                                  onclick="$(this).colorbox({iframe: true, href: 'http://#{utilControl.hostPortContext}/app/album/detail/songAdd.xhtml?idalbum_=#{param.idalbum_}', width: '90%', height: '70%'});"/>
+                    </center>
+                    <br/><br/>
+
+                    <p:dataTable id="songs_" var="s" value="#{albumController.songs}" style="margin-bottom:20px">
+
+                        <p:column headerText="Disco">
+                            <h:outputText value="#{s.discnumber}" />
+                        </p:column>
+
+                        <p:column headerText="No.">
+                            <h:outputText value="#{s.songnumber}" />
+                        </p:column>
+
+                        <p:column headerText="Título">
+                            <h:outputText value="#{s.title}" />
+                        </p:column>
+
+                        <p:column headerText="Artistas">
+                            <p:dataList value="#{albumController.artistsFromSong(s.idsong)}" 
+                                        var="a" type="ordered">
+                                #{a.stageName}
+                            </p:dataList>
+                        </p:column>
+
+                        <p:column headerText="Duración">
+                            <h:outputText value="#{s.length}" />
+                        </p:column>
+
+                        <p:column headerText="Ver">
+                            <p:lightBox id="lighbox2">
+                                <h:outputLink value="#">
+                                    <h:outputText value="Ver Video" />
+                                </h:outputLink>
+                                <f:facet name="inline">
+                                    <p:media value="#{s.songUrl}"  width="400" height="225" player="flash" />
+                                </f:facet>
+                            </p:lightBox>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>
 
             </ui:define>
 

@@ -2,6 +2,7 @@ package facade;
 
 import entity.Albumhasartist;
 import entity.Artist;
+import entity.Songhasartist;
 import general.AbstractFacade;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -103,6 +104,38 @@ public class ArtistFacade extends AbstractFacade<Artist> {
             int idalb = aha.getIdalbum().getIdalbum();
             if (idalb == idalbum) {
                 artists.add(aha.getIdartist());
+            }
+        }
+
+        return artists;
+    }
+
+    public HashMap<Integer, List<Artist>> getMapAllArtistsFromSongs(Integer idalbum) {
+        HashMap<Integer, List<Artist>> resultMap = new HashMap<>();
+
+        String sql = "SELECT sha.*"
+                + " FROM songhasartist sha, song s"
+                + " WHERE sha.idsong = s.idsong"
+                + " AND s.idalbum = " + idalbum;
+        List<Songhasartist> ShAs = findNative(sql, true, 0, 0, Songhasartist.class);
+
+        for (Songhasartist sha : ShAs) {
+            Integer idS = sha.getIdsong().getIdsong();
+            if (!resultMap.containsKey(idS)) {
+                resultMap.put(idS, addArtistsFromSongsToMapByIdAlbum(idS, ShAs));
+            }
+        }
+
+        return resultMap;
+    }
+
+    private List<Artist> addArtistsFromSongsToMapByIdAlbum(int idsong, List<Songhasartist> ShAs) {
+        List<Artist> artists = new ArrayList<>();
+
+        for (Songhasartist sha : ShAs) {
+            int idSng = sha.getIdsong().getIdsong();
+            if (idSng == idsong) {
+                artists.add(sha.getIdartist());
             }
         }
 

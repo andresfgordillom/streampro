@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../_templateBlank.xhtml">
+
+            <ui:define name="content">
+
+                <h:outputText value="#{songController.albumById}"/>
+                <br/>
+
+                <div align="left">
+
+                    <br/>
+                    <h:form id="ff_">
+                        <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-9">
+
+                            <p:outputLabel value="Álbum"/>
+                            <h:panelGroup>
+                                <h:outputText value="#{songController.obj.idalbum.title}"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="title_" value="Título"/>
+                            <h:panelGroup>
+                                <p:inputText id="title_" size="35" required="true" requiredMessage="¡Requerido!" 
+                                             value="#{songController.obj.title}"/>
+                                <p:message for="title_"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="artists_" value="Artistas"/>   
+                            <h:panelGroup>
+                                <p:autoComplete id="artists_" multiple="true" value="#{songController.artists}" 
+                                                completeMethod="#{artistController.autoComplete}" required="true" converter="artistConverter"
+                                                var="a" itemLabel="#{a.stageName}" itemValue="#{a}" forceSelection="true"/> 
+                                <p:message for="artists_"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="length_" value="Duración"/>
+                            <h:panelGroup>
+                                <p:calendar value="#{songController.obj.length}" id="length_" requiredMessage="¡Requerido!" required="true" 
+                                            pattern="HH:mm:ss" locale="es" timeOnly="true"/>
+                                <p:message for="length_"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="songUrl_" value="URL"/>
+                            <h:panelGroup>
+                                <p:inputText id="songUrl_" size="35" required="true" requiredMessage="¡Requerido!" 
+                                             value="#{songController.obj.songUrl}"/>
+                                <p:message for="songUrl_"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="discnumber_" value="Número de Disco"/>
+                            <h:panelGroup>
+                                <p:inputText id="discnumber_" size="35" required="true" requiredMessage="¡Requerido!" 
+                                             value="#{songController.obj.discnumber}"/>
+                                <p:message for="discnumber_"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="songnumber_" value="Número de Canción en el Disco"/>
+                            <h:panelGroup>
+                                <p:inputText id="songnumber_" size="35" required="true" requiredMessage="¡Requerido!" 
+                                             value="#{songController.obj.songnumber}"/>
+                                <p:message for="songnumber_"/>
+                            </h:panelGroup>
+
+                        </p:panelGrid>
+
+                        <br/>
+                        <center>
+                            <p:commandButton ajax="false" icon="fa fa-save" value="Guardar" 
+                                             action="#{songController.create}">
+                                <f:param name="idalbum_" value="#{param.idalbum_}"/>
+                            </p:commandButton>
+                        </center>
+
+                        <br/><br/>
+                        <h:panelGroup rendered="#{songController.successful}">
+                            <script type="text/javascript">
+                                setTimeout("parent.document.location.href = 'http://#{utilControl.hostPortContext}/app/album/detail/songs.xhtml?idalbum_=#{songController.obj.idalbum.idalbum}';", 500);
+                            </script>
+                        </h:panelGroup>
+
+                    </h:form>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

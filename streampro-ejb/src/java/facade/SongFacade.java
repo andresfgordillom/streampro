@@ -1,6 +1,8 @@
 package facade;
 
+import entity.Artist;
 import entity.Song;
+import entity.Songhasartist;
 import general.AbstractFacade;
 import java.math.BigInteger;
 import java.util.List;
@@ -8,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import org.hibernate.impl.SessionImpl;
 import util.StringUtil;
 
 @Stateless
@@ -67,6 +70,43 @@ public class SongFacade extends AbstractFacade<Song> {
                 + " FROM song"
                 + " WHERE to_tsvector(idsong||' '||title)@@to_tsquery('" + new StringUtil().reemplazaEspacios(valBusq, "&").trim() + "')";
         return this.findNative(sql, allReg, firstReg, maxReg, Song.class);
+    }
+
+    public List<Song> listAllByAlbum(Integer idalbum) {
+        String hql = " SELECT obj "
+                + " FROM Song obj "
+                + " WHERE obj.idalbum.idalbum = " + idalbum
+                + " ORDER BY obj.discnumber, obj.songnumber ASC";
+        return this.find(hql, true, 0, 0);
+    }
+
+    public Song create(Song song, List<Artist> artists, StringBuilder msg) throws Exception {
+        //Obteniendo sesion
+        beginTransaction();
+
+        //Realizando Operacion
+        try {
+            SessionImpl sess = getSess();
+            sess.save(song);
+
+            for (Artist art : artists) {
+                Songhasartist sha = new Songhasartist();
+                sha.setIdsongartist(song.getIdsong() + "_" + art.getIdartist());
+                sha.setIdsong(song);
+                sha.setIdartist(art);
+                sess.save(sha);
+            }
+
+            commitTransaction();
+        } catch (Exception e) {
+            e.printStackTrace();
+            rollbackTransaction();
+            System.out.println("FALLA, creando registro !" + e);
+        }
+
+        //Cerrando conexion
+        endTransaction();
+        return song;
     }
 
 }

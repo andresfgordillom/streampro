@@ -4,7 +4,10 @@
  */
 package controller;
 
+import entity.Album;
+import entity.Artist;
 import entity.Song;
+import facade.AlbumFacade;
 import facade.SongFacade;
 import general.EntityControl;
 import interfaces.EntityControlInterface;
@@ -25,7 +28,10 @@ public class SongController extends EntityControl implements EntityControlInterf
 
     @EJB
     private SongFacade facade;
+    @EJB
+    private AlbumFacade albumfacade;
     Song obj = new Song();
+    List<Artist> artists = new ArrayList<>();
 
     public SongController() {
         this.setEntityName("Song");
@@ -45,6 +51,14 @@ public class SongController extends EntityControl implements EntityControlInterf
     @Override
     public void setObj(Object obj) {
         this.obj = (Song) obj;
+    }
+
+    public List<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<Artist> artists) {
+        this.artists = artists;
     }
 
     @Override
@@ -69,6 +83,12 @@ public class SongController extends EntityControl implements EntityControlInterf
         return "";
     }
 
+    public String getAlbumById() {
+        Album alb = albumfacade.find(facesUtil.getFacesParamInteger("idalbum_"));
+        getObj().setIdalbum(alb);
+        return "";
+    }
+
     public String recuperaById(Integer idsong) {
         this.obj = facade.find(idsong);
         return "";
@@ -90,11 +110,23 @@ public class SongController extends EntityControl implements EntityControlInterf
 
     @Override
     public String create() {
-
         try {
-            facade.create(obj);
-            msg = "¡Registro realizado correctamente!";
-            setSuccessful(true);
+            this.getAlbumById();
+
+            if (artists.isEmpty()) {
+                msgErr = "¡Debe seleccionar al menos un artista!";
+                return null;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            facade.create(obj, artists, sb);
+
+            if (sb.toString().isEmpty()) {
+                msg = "¡Registro realizado correctamente!";
+                setSuccessful(true);
+            } else {
+                msgErr = "¡FALLA, creando Canción !" + sb.toString();
+            }
         } catch (Exception e) {
             msgErr = "FALLA, creando Canción !" + e;
             e.printStackTrace();

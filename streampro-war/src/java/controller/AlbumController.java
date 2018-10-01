@@ -6,8 +6,10 @@ package controller;
 
 import entity.Album;
 import entity.Artist;
+import entity.Song;
 import facade.AlbumFacade;
 import facade.ArtistFacade;
+import facade.SongFacade;
 import general.EntityControl;
 import interfaces.EntityControlInterface;
 import java.util.ArrayList;
@@ -30,9 +32,13 @@ public class AlbumController extends EntityControl implements EntityControlInter
     private AlbumFacade facade;
     @EJB
     private ArtistFacade artistFacade;
+    @EJB
+    private SongFacade songFacade;
     Album obj = new Album();
     List<Artist> mainArtists = new ArrayList<>();
+    List<Song> songs = new ArrayList<>();
     HashMap<Integer, List<Artist>> allMainArtists = new HashMap<>();
+    HashMap<Integer, List<Artist>> allArtistsFromSongs = new HashMap<>();
 
     public AlbumController() {
         this.setEntityName("Album");
@@ -68,6 +74,22 @@ public class AlbumController extends EntityControl implements EntityControlInter
 
     public void setAllMainArtists(HashMap<Integer, List<Artist>> allMainArtists) {
         this.allMainArtists = allMainArtists;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
+
+    public HashMap<Integer, List<Artist>> getAllArtistsFromSongs() {
+        return allArtistsFromSongs;
+    }
+
+    public void setAllArtistsFromSongs(HashMap<Integer, List<Artist>> allArtistsFromSongs) {
+        this.allArtistsFromSongs = allArtistsFromSongs;
     }
 
     @Override
@@ -194,6 +216,20 @@ public class AlbumController extends EntityControl implements EntityControlInter
     public List<Artist> mainArtistsByIdAlbum(Integer idalbum) {
         if (idalbum != null) {
             return getAllMainArtists().get(idalbum);
+        }
+
+        return new ArrayList<>();
+    }
+
+    public String getSongsByAlbum() {
+        setSongs(songFacade.listAllByAlbum(getObj().getIdalbum()));
+        setAllArtistsFromSongs(artistFacade.getMapAllArtistsFromSongs(getObj().getIdalbum()));
+        return "";
+    }
+
+    public List<Artist> artistsFromSong(Integer idsong) {
+        if (idsong != null) {
+            return getAllArtistsFromSongs().get(idsong);
         }
 
         return new ArrayList<>();
