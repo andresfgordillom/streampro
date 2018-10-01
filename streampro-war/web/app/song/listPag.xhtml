@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../_templateEmbed.xhtml">
+
+            <ui:define name="content.embed">
+
+                <h:outputText value="#{songController.allObjects}"/>
+
+                <div align="center">
+                    <p:dataTable reflow="true" var="lst" value="#{songController.lst}" tableStyle="width:auto"
+                                 emptyMessage="No se encontraron registros.">
+
+                        <p:column headerText="Título">
+                            <h:outputLink value="http://#{utilControl.hostPortContext}/app/song/detail/song.xhtml">
+                                <f:param name="idsong_" value="#{lst.idsong}" />                         
+                                <h:outputText value="#{lst.title}"/>
+                            </h:outputLink>
+                        </p:column>
+
+                        <p:column headerText="Duración">
+                            <h:outputText value="#{lst.length}">
+                                <f:convertDateTime pattern="mm:ss" />
+                            </h:outputText>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

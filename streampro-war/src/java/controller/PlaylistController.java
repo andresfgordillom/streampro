@@ -32,7 +32,7 @@ public class PlaylistController extends EntityControl implements EntityControlIn
         this.setAllResult(true);
         this.setFirstRegList(0);
         this.setMaxRegList(25);
-        this.setOrderBy("title");
+        this.setOrderBy("listTitle");
         this.setAscDesc("ASC");
         this.setEntityID("idplaylist");
     }

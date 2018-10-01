@@ -40,6 +40,13 @@
                                 </h:commandLink>
                             </h:panelGroup>
 
+                            <h:panelGroup>
+                                <h:commandLink action="app.album.detail.songs">
+                                    <h:outputText styleClass="fa fa-edit" value="Canciones"/>
+                                    <f:param name="idalbum_" value="#{param.idalbum_}"/>
+                                </h:commandLink>
+                            </h:panelGroup>
+
                         </p:panelGrid>
                     </div>
                 </h:form>

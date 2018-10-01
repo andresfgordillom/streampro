@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_songtemp.xhtml">
+
+            <ui:define name="app.content.song._songtemplate.content">
+                
+                <h:outputText value="#{songController.allObjects}"/><!-- Importante -->
+
+                <!-- Pagination -->
+                <link type="text/css" rel="stylesheet" href="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepagination/simplePagination.css"/>
+                <script type="text/javascript" src="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepagination/jquery.simplePagination.js"></script>
+                <!-- Pagination -->
+
+                <h:panelGroup rendered="#{param.busq_!=null and param.busq_!=''}">
+                    <h:outputText value="#{songController.setQueryVal(param.busq_)}"/>
+                </h:panelGroup>
+
+                <div align="center">
+                    <p:panel header="Buscar Compañía">
+                        <br/>
+                        <h:form id="fo_">
+                            <b style="color:gray"> Título</b>
+                            <br/><br/>
+                            <p:inputText value="#{songController.queryVal}" size="30" id="busq_"/>
+                            <br/><br/>
+                            <p:commandButton value="Buscar" icon="ui-icon-search" ajax="false"/>
+                            <br/>
+                        </h:form>
+                    </p:panel>
+                    <script type="text/javascript">
+                        document.getElementById('fo_:busq_').focus();
+                    </script>
+                    <br/>
+                    <h:panelGroup rendered="#{songController.queryVal!=null and songController.queryVal.trim()!=''}">
+                        <p:panel>
+                            <div align="right">
+                                <i>Resultados: </i> <h:outputText value="#{songController.countQueryObj}" style="font-weight: bold"/>
+                            </div>   
+                            <div align="left">
+                                <i>Criterio: </i><b>#{songController.queryVal}</b><br/>
+                            </div>
+                            <br/><br/>
+                            <div id="list_">
+                            </div>
+                            <br/><br/>
+
+                            <div id="pag_" align="right">
+                            </div>
+                            <script type="text/javascript" src="http://#{utilControl.hostPortContext}/libscript/jquery-simple-pag/simplepag.js"></script>
+                            <script type="text/javascript">
+                        var objPag_ = new simplepag_(#{songController.totalCount},#{songController.maxRegList}, "pag_", "list_", "http://#{utilControl.hostPortContext}/app/song/searchPag.xhtml?busq_=#{songController.queryVal}");
+                            </script>
+                        </p:panel>
+                    </h:panelGroup>
+                </div>
+
+                <br/><br/><br/>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

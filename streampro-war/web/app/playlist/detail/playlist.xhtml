@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./_listDetailTemp.xhtml">
+
+            <ui:define name="app.content.list.detail._listtemplate.content">
+                
+                <div align="center">
+                    <p:panelGrid columns="2">
+                        <f:facet name="header">Detalle</f:facet>
+
+                        <p:outputLabel value="Título"/>
+                        <p:outputLabel value="#{playlistController.obj.listTitle}"/>
+
+                        <p:outputLabel value="Carátula"/>
+                        <p:graphicImage url="#{playlistController.obj.coverUrl}" width="200" height="200"/>
+
+                        <p:outputLabel value="Pública"/>
+                        <h:panelGroup>
+                            <p:outputLabel value="Sí" rendered="#{playlistController.obj.isPublic}" style="color: darkgreen"/>
+                            <p:outputLabel value="NO" rendered="#{!playlistController.obj.isPublic}" style="color: red"/>
+                        </h:panelGroup>
+
+                        <p:outputLabel value="Usuario"/>
+                        <p:outputLabel value="#{playlistController.obj.iduser.nickname}"/>
+
+                    </p:panelGrid>
+
+                    <br/><br/><br/>
+
+                </div>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
