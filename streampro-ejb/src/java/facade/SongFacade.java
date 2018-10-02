@@ -80,6 +80,14 @@ public class SongFacade extends AbstractFacade<Song> {
         return this.find(hql, true, 0, 0);
     }
 
+    public List<Song> listAllByList(Integer idplaylist) {
+        String hql = " SELECT phs.idsong"
+                + " FROM Playlisthassong phs"
+                + " WHERE phs.idplaylist.idplaylist = " + idplaylist
+                + " ORDER BY phs.idsong.title ASC";
+        return this.find(hql, true, 0, 0);
+    }
+
     public Song create(Song song, List<Artist> artists, StringBuilder msg) throws Exception {
         //Obteniendo sesion
         beginTransaction();

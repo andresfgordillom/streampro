@@ -110,13 +110,23 @@ public class ArtistFacade extends AbstractFacade<Artist> {
         return artists;
     }
 
-    public HashMap<Integer, List<Artist>> getMapAllArtistsFromSongs(Integer idalbum) {
+    public HashMap<Integer, List<Artist>> getMapAllArtistsFromSongs(Integer idalbum, Integer idplaylist) {
         HashMap<Integer, List<Artist>> resultMap = new HashMap<>();
+
+        String andAlbum = (idalbum != null) ? " AND s.idalbum = " + idalbum : "";
+        String andList = "";
+        if (idplaylist != null) {
+            andList = " AND sha.idsong IN ("
+                    + "     SELECT phs.idsong"
+                    + "     FROM playlisthassong phs"
+                    + "     WHERE idplaylist = " + idplaylist + ")";
+        }
 
         String sql = "SELECT sha.*"
                 + " FROM songhasartist sha, song s"
                 + " WHERE sha.idsong = s.idsong"
-                + " AND s.idalbum = " + idalbum;
+                + andAlbum
+                + andList;
         List<Songhasartist> ShAs = findNative(sql, true, 0, 0, Songhasartist.class);
 
         for (Songhasartist sha : ShAs) {

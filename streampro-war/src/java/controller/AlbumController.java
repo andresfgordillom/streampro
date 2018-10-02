@@ -223,7 +223,7 @@ public class AlbumController extends EntityControl implements EntityControlInter
 
     public String getSongsByAlbum() {
         setSongs(songFacade.listAllByAlbum(getObj().getIdalbum()));
-        setAllArtistsFromSongs(artistFacade.getMapAllArtistsFromSongs(getObj().getIdalbum()));
+        setAllArtistsFromSongs(artistFacade.getMapAllArtistsFromSongs(getObj().getIdalbum(), null));
         return "";
     }
 

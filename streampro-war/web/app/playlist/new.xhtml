@@ -15,7 +15,7 @@
                     <div class="ui-g-0 ui-md-0 ui-lg-2"/>
                     <div class="ui-g-12 ui-md-12 ui-lg-8">
                         <h:form id="ff_"> 
-                            <p:panel header="Nuevo Género">
+                            <p:panel header="Nueva Lista de Reproducción">
                                 <div class="ui-fluid">
                                     <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-9" styleClass="ui-panelgrid-blank">
 
@@ -40,12 +40,12 @@
                                             <p:message for="isPublic_"/>
                                         </h:panelGroup>
 
-                                        <p:outputLabel for="iduser_" value="Compañía"/>
+                                        <p:outputLabel for="iduser_" value="Usuario"/>
                                         <h:panelGroup>
                                             <p:autoComplete id="iduser_" required="true" requiredMessage="¡Requerido!" 
                                                             value="#{playlistController.obj.iduser}" 
                                                             completeMethod="#{userController.autoComplete}"  
-                                                            styleClass="autocomplete_" var="c" 
+                                                            styleClass="autocomplete_" var="u" 
                                                             itemLabel="#{u.nickname}" forceSelection="true"
                                                             itemValue="#{u}" size="25" />
                                             <p:message for="iduser_"/>

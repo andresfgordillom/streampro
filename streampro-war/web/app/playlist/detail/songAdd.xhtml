@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../../_templateBlank.xhtml">
+
+            <ui:define name="content">
+
+                <h:outputText value="#{playlistController.objectById}"/>
+                <br/>
+
+                <div align="left">
+
+                    <br/>
+                    <h:form id="ff_">
+                        <p:panelGrid columns="2" layout="grid" columnClasses="ui-grid-col-3,ui-grid-col-9">
+
+                            <p:outputLabel value="Álbum"/>
+                            <h:panelGroup>
+                                <h:outputText value="#{playlistController.obj.listTitle}"/>
+                            </h:panelGroup>
+
+                            <p:outputLabel for="song_" value="Canción"/>   
+                            <h:panelGroup>
+                                <p:autoComplete id="song_" value="#{playlistController.phs.idsong}" 
+                                                completeMethod="#{songController.autoComplete}" required="true"
+                                                var="s" itemLabel="#{s.title}" itemValue="#{s}" forceSelection="true"/> 
+                                <p:message for="song_"/>
+                            </h:panelGroup>
+
+                        </p:panelGrid>
+
+                        <br/>
+                        <center>
+                            <p:commandButton ajax="false" icon="fa fa-save" value="Guardar" 
+                                             action="#{playlistController.addSonToPlaylist}">
+                                <f:param name="idplaylist_" value="#{param.idplaylist_}"/>
+                            </p:commandButton>
+                        </center>
+
+                        <br/><br/>
+                        <h:panelGroup rendered="#{playlistController.successful}">
+                            <script type="text/javascript">
+                                setTimeout("parent.document.location.href = 'http://#{utilControl.hostPortContext}/app/playlist/detail/songs.xhtml?idplaylist_=#{playlistController.obj.idplaylist}';", 500);
+                            </script>
+                        </h:panelGroup>
+
+                    </h:form>
+
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

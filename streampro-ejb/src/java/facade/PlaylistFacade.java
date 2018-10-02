@@ -1,6 +1,10 @@
 package facade;
 
+import entity.Artist;
 import entity.Playlist;
+import entity.Playlisthassong;
+import entity.Song;
+import entity.Songhasartist;
 import general.AbstractFacade;
 import java.math.BigInteger;
 import java.util.List;
@@ -8,6 +12,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import org.hibernate.impl.SessionImpl;
 import util.StringUtil;
 
 @Stateless
@@ -67,6 +72,30 @@ public class PlaylistFacade extends AbstractFacade<Playlist> {
                 + " FROM playlist"
                 + " WHERE to_tsvector(idplaylist||' '||list_title)@@to_tsquery('" + new StringUtil().reemplazaEspacios(valBusq, "&").trim() + "')";
         return this.findNative(sql, allReg, firstReg, maxReg, Playlist.class);
+    }
+
+    public Playlisthassong addSonToList(Playlist pl, Playlisthassong phs, StringBuilder msg) throws Exception {
+        //Obteniendo sesion
+        beginTransaction();
+
+        //Realizando Operacion
+        try {
+            SessionImpl sess = getSess();
+            phs.setIdlistsong(pl.getIdplaylist()+ "_" + phs.getIdsong().getIdsong());
+            phs.setIdplaylist(pl);
+            sess.save(phs);
+
+            commitTransaction();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            rollbackTransaction();
+            System.out.println("FALLA, creando registro !" + e);
+        }
+
+        //Cerrando conexion
+        endTransaction();
+        return phs;
     }
 
 }
